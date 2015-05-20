@@ -1,4 +1,4 @@
 # IoT Explorer
 
 
-<img src="iotexplorer/revisions/master/entry/capture.png" height="250px">
+<img src="iot-compass/blob/master/capture.png" height="250px">
