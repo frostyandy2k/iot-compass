@@ -1,6 +1,6 @@
 {
   "name": "iot-compass",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Internet of Things Radar/Compass using IndianaJS",
   "main": "index.js",
   "scripts": {
