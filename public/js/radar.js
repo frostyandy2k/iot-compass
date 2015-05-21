@@ -2,13 +2,13 @@ var orientationoffset = {tiltLR: 0, tiltFB: 0, dir: 0};
 var currentorientation = {tiltLR: 0, tiltFB: 0, dir: 0};
 
 var items = [
-  {label: "Mikrowelle",
+  {uri: "microwave",
     location: {dir: 10},
     color: "blue"},
-  {label: "Blume",
+  {uri: "flower",
     location: {dir: 90},
     color: "red"},
-  {label: "Lampe",
+  {uri: "lamp",
     location: {dir: -90},
     color: "white"}
 ];
@@ -17,10 +17,9 @@ function initRadar(divSelector) {
   $(divSelector).html('');
   var spacetime = d3.select(divSelector);
 
-  var svgWidth = 300;
-  var svgHeight = 300;
-  // $('#radardiv').append(svgWidth).append(svgHeight)
-  // console.log(divWidth, divHeight)
+  var svgWidth = 370;
+  var svgHeight = 370;
+
   var width = svgWidth,
       height = svgHeight,
       radius = Math.min(width, height);
@@ -57,7 +56,7 @@ function initRadar(divSelector) {
     var y = -radarradius*Math.cos((val.location.dir-getLocation().dir)*Math.PI/180);
     // console.log(x,y)
     svg.append("circle")
-      .attr("class", "items " + val.label)
+      .attr("class", "items " + val.uri)
       .attr("r", itemradius)
       .attr("transform", "translate("+x+"," + y + ")")
       .style("stroke", "black")
@@ -65,26 +64,30 @@ function initRadar(divSelector) {
   });
 }
 
-function showItem() {
-
-  if(selected == "All") {
-    d3.selectAll('.items').attr("display","block");
-  } else {
-    d3.selectAll('.items').attr("display","none");
-    var selecteditem = $.grep(items, function (item) {    
-      return item.label == selected;
-    })[0];
-    d3.select("."+selecteditem.label)
-      .attr("display","block")
-  }
-}
-
 function updatePositions() {
+  var radartarget = null;
+  var guard = false;
   $.each(items, function(key, val){
     var degree = val.location.dir;
-    var x = radarradius*Math.sin((degree+getLocation().dir)*Math.PI/180);
-    var y = -radarradius*Math.cos((degree+getLocation().dir)*Math.PI/180);
-    d3.select("."+val.label)
+    var actualDirection = degree+getLocation().dir;
+    // console.log(getLocation().dir,actualDirection)
+    // $('#radartarget1').html(Math.round(getLocation().dir) + " " + Math.round(actualDirection));
+    if(actualDirection < 5 && actualDirection > -5) {
+        radartarget = val.uri;
+        // console.log(radartarget)
+        // $('#radartarget').html(radartarget);
+        // console.log($('#radarButton').find('image'))
+        $('#radarButton').find('image').attr('href', 'img/' + val.uri + '.png');
+        navigator.vibrate(10);
+        guard = true;
+    } else if(!guard){
+      // $('#radartarget').html('none');
+      $('#radarButton').find('image').attr('href', 'img/arrow.png');
+      guard = false;
+    }
+    var x = radarradius*Math.sin(actualDirection*Math.PI/180);
+    var y = -radarradius*Math.cos(actualDirection*Math.PI/180);
+    d3.select("."+val.uri)
       .attr("transform", "translate("+x+", "+y+")");
   });
 }
@@ -95,6 +98,12 @@ function getLocation() {
   return location;
 }
 
+function turnDirection() {
+  currentorientation.dir += 10;
+  if(currentorientation.dir > 180) 
+      currentorientation.dir = currentorientation.dir-360;
+  updatePositions();
+}
 function resetOrientation() {
   orientationoffset.tiltLR = currentorientation.tiltLR;
   orientationoffset.tiltFB = currentorientation.tiltFB;
@@ -112,11 +121,11 @@ function init() {
       var tiltFB = eventData.beta;
       
       // alpha is the compass direction the device is facing in degrees
-      var dir = eventData.alpha
+      var dir = eventData.alpha;
       
       currentorientation.tiltLR = tiltLR;
       currentorientation.tiltFB = tiltFB;
-      currentorientation.dir = dir;
+      currentorientation.dir = (dir<0) ? 360+dir : dir;
 
       // call our orientation event handler
       if(dir < orientationoffset.dir) {
