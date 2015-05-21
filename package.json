@@ -24,7 +24,11 @@
   },
   "homepage": "https://github.com/frostyandy2k/iot-compass",
   "dependencies": {
+    "bootstrap": "^3.3.4",
+    "express": "^4.12.4",
+    "jade": "^1.9.2",
     "level": "^1.0.0",
+    "morgan": "^1.5.3",
     "restify": "^3.0.3"
   }
 }

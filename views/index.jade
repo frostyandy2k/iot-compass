@@ -1,0 +1,85 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    //- link(rel='stylesheet', href='css/bootstrap-responsive.css') //probably already compiled into boostrap.min
+    
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='startbootstrap-scrolling-nav-1.0.3/css/scrolling-nav.css')
+    link(rel='stylesheet', href='css/style.css')
+
+    //- use browserify
+    //- script(src='js/bundle.js')
+
+    script(src='js/jquery.js')
+    script(src='js/bootstrap.min.js')
+    script(src='startbootstrap-scrolling-nav-1.0.3/js/jquery.easing.min.js')
+    script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
+
+body.container-fluid
+    header#explorerheader(role="navigation").row
+        h1.pull-left #{title} Explorer
+        a(href="#overviewbar").page-scroll.pull-right 
+            h2 Content
+    section#radar.page-section.container-fluid
+        img(src="img/Radar1.jpg")
+    header#overviewbar(role="navigation").row
+        h1.pull-left #{title} Page
+        a(href='#explorerheader').page-scroll.pull-right 
+            h2 Radar
+    section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
+        div(typeof='Product')
+            h2(property='name') Kenmore White 17&quot; Microwave
+            span(property='label', content='Mikrowelle')
+            <img src="img/microwave.png" alt='Kenmore 17" Microwave' />
+          div(property='aggregateRating', typeof='AggregateRating')
+            | Rated 
+            span(property='ratingValue') 3.5/5 
+            | based on
+            span(property='reviewCount') 11
+            | customer reviews
+          div(property='offers', typeof='Offer')
+            | Cost:
+            span(property='priceCurrency', content='USD') $
+            span(property='price', content='1000.00') 1,000.00
+            |           
+            br
+            |         Availability:
+            |         
+            link(property='availability', href='http://schema.org/InStock')
+            | In stock
+            | Product description:
+            |       
+          span(property='description')
+            | 0.7 cubic feet countertop microwave.
+            | Has six preset cooking categories and convenience features like
+            | Add-A-Minute and Child Lock.
+            |     
+            div(typeof='Product')
+              h2(property='name') Blume
+              |         
+              img(height='120', width='120', src='img/410y9WGYNdL._SY300_.jpg', alt='rote Blume')
+              br
+              |         Eine tolle 
+              span(property='color') rot
+              | e Blume.
+              |         Man sollte die Blume alle 
+              span(property='watering') 2
+              | .
+            |     
+            div(typeof='Product')
+              h2(property='name') Lampe
+              |         
+              img(height='130', width='110', src='img/zoom1.jpg')
+              br
+              |         Ein Lampe die ihre Farbe wechselt, wenn sie Geräusche hört!
+    script.
+        supportsVibrate = "vibrate" in navigator;
+        console.log('This device supports vibration: '+ supportsVibrate);
+        //- alert(supportsVibrate);
+        $(document).ready(function(){
+            window.navigator.vibrate([100,30,100]);
+            navigator.vibrate(100);
+            });
