@@ -63,6 +63,13 @@ function initRadar(divSelector) {
       .style("fill", val.color);
   });
 }
+var showItems = false;
+
+function toggleShowSelectedItem() {
+  showItems = !showItems
+  if(showItems) $('.br_to_lengthenpage').hide();
+  else $('.br_to_lengthenpage').show();
+}
 
 function updatePositions() {
   var radartarget = null;
@@ -75,14 +82,27 @@ function updatePositions() {
     if(actualDirection < 5 && actualDirection > -5) {
         radartarget = val.uri;
         // console.log(radartarget)
-        // $('#radartarget').html(radartarget);
+        $('#radartarget').html(radartarget);
         // console.log($('#radarButton').find('image'))
+        
+        // adapt image and hyperlink
+        $('#radarButton').attr('href', '#' + val.uri);
         $('#radarButton').find('image').attr('href', 'img/' + val.uri + '.png');
-        navigator.vibrate(10);
+
+        // Only shows the content of the targeted item
+        if(showItems) showItem(val.uri);
+
+        navigator.vibrate(100);
         guard = true;
     } else if(!guard){
-      // $('#radartarget').html('none');
+      $('#radartarget').html('none');
+      
+      // reset image and hyperlink
+      $('#radarButton').attr('href', '#pagecontent');
       $('#radarButton').find('image').attr('href', 'img/arrow.png');
+
+      // shows all items (full page) if no item is directly in front
+      if(showItems) showItem('all');
       guard = false;
     }
     var x = radarradius*Math.sin(actualDirection*Math.PI/180);
@@ -90,6 +110,15 @@ function updatePositions() {
     d3.select("."+val.uri)
       .attr("transform", "translate("+x+", "+y+")");
   });
+}
+function showItem(uri) {
+  $.each(items, function(key, value) {
+    if(uri == 'all' || uri == value.uri) {
+      document.getElementById(value.uri).style.display = 'block';
+    } else {
+      document.getElementById(value.uri).style.display = 'none';
+    }
+  })
 }
 
 function getLocation() {
@@ -109,7 +138,7 @@ function resetOrientation() {
   orientationoffset.tiltFB = currentorientation.tiltFB;
   orientationoffset.dir = currentorientation.dir;
 }
-
+var initialResetDone = false;
 function init() {
   if (window.DeviceOrientationEvent) {
     // Listen for the deviceorientation event and handle the raw data
@@ -126,13 +155,16 @@ function init() {
       currentorientation.tiltLR = tiltLR;
       currentorientation.tiltFB = tiltFB;
       currentorientation.dir = (dir<0) ? 360+dir : dir;
-
-      // call our orientation event handler
-      if(dir < orientationoffset.dir) {
-        dir = 360 - (orientationoffset.dir - dir);
-      } else {
-        dir = dir - orientationoffset.dir;
+      if(!initialResetDone) {
+        resetOrientation();
+        initialResetDone = true;
       }
+      // if(dir < orientationoffset.dir) {
+      //   dir = 360 - (orientationoffset.dir - dir);
+      // } else {
+      //   dir = dir - orientationoffset.dir;
+      // }
+      // call our orientation event handler
       updatePositions();
       }, false);
   } else {
