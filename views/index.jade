@@ -19,19 +19,29 @@ html
     script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
     script(src='http://d3js.org/d3.v3.min.js')
     script(src='js/radar.js')
+    script(src='js/headroom.min.js')
+
 
 body.container-fluid
     header#explorerheader(role="navigation").row
         h1.pull-left #{title} Explorer
-        a(href="#overviewbar").page-scroll.pull-right 
-            h2 Content
+        a(href="#overviewbar").page-scroll.pull-right
+            ul.list-inline
+                li 
+                    h2 Content
+                li
+                    span.glyphicon.glyphicon-list-alt
     section#radar.page-section.row
         div#radardiv
         //- img(src="img/Radar1.jpg")
     header#overviewbar(role="navigation").row
         h1.pull-left #{title} Page
         a(href='#explorerheader').page-scroll.pull-right 
-            h2 Radar
+            ul.list-inline
+                li
+                    h2 Radar
+                li
+                    span#mini-radar.glyphicon.glyphicon-dashboard
     section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
         div#microwave(typeof='Product')
             h2(property='name') Kenmore White 17&quot; Microwave
@@ -82,9 +92,32 @@ body.container-fluid
         //- console.log('This device supports vibration: '+ supportsVibrate);
         //- alert(supportsVibrate);
         $(document).ready(function(){
-          init();
-          resetOrientation();
-          initRadar('#radardiv');
+            // grab an element
+            var myElement = document.querySelector("#overviewbar");
+            // construct an instance of Headroom, passing the element
+            var headroom  = new Headroom(myElement, {
+                      "offset": 348,
+                      "tolerance": 5,
+                      "classes": {
+                        "notTop" : "fixed"
+                      },
+                      onTop : function() {
+                        document.querySelector('#pagecontent').style.paddingTop = '0px';
+                        $('#mini-radar').hide();
+                      },
+                      onNotTop : function() {
+                        height = document.querySelector('#explorerheader').offsetHeight + document.querySelector('#radar').offsetHeight;
+                        myElement.style.top = height;
+                        document.querySelector('#pagecontent').style.paddingTop = '54px';
+                        $('#mini-radar').show();
+                      console.log("Show minified Radar!" + height)}
+                    });
+            // initialise
+            headroom.init(); 
+
+            init();
+            resetOrientation();
+            initRadar('#radardiv');
             //- window.navigator.vibrate([100,30,100]);
             //- navigator.vibrate(100);
             });
