@@ -53,8 +53,30 @@ server.get('/kitchen/put', function(req, res, next) {
 		res.send("ADDED/UPDATED: "+key+"="+value);
 	});
 });
+server.post('/kitchen/put', function(req, res, next) {
+	var key = req.params.uri;
+	var direction = req.params.dir;
+	var slope = req.params.slope;
+	var distance = req.params.dist;
+	var value = {direction:direction,slope:slope,distance:distance};
+	console.log("PUT ", key, value);
+
+	db.put(key, value, function(err) {
+		if(err) console.log("Putting failed:",err);
+		res.send(value);
+	});
+});
 
 server.get('/kitchen/delete', function(req, res, next) {
+	var key = req.params.uri;
+	console.log("DELETE ", key);
+
+	db.del(key, function(err) {
+		if(err) console.log("Putting failed:",err);
+		res.send("DELETED: "+key);
+	});
+});
+server.post('/kitchen/delete', function(req, res, next) {
 	var key = req.params.uri;
 	console.log("DELETE ", key);
 
