@@ -92,8 +92,7 @@ function initRadar(divSelector) {
     .attr("r", radarradius/3)
     .attr("id", "selectionCircle")
     .style("stroke", "#ff6f00")
-    // .attr("class", "svgshadow")
-    .attr("fill","url(#flowerpatternFull)");
+    .attr("fill","none");
 
   generatePattern(svg, 50, "img/flower.png", 'flowerpattern');
   generatePattern(svg, 100, "img/flower.png", 'flowerpatternFull');
@@ -102,6 +101,7 @@ function initRadar(divSelector) {
   generatePattern(svg, 100, "img/microwave.png", 'microwavepatternFull');
 
   generatePattern(svg, 50, "img/lamp.png", 'lamppattern');
+  generatePattern(svg, 100, "img/lamp.png", 'lamppatternFull');
 
   $.each(items, function(key, val){
     var x = radarradius*Math.sin((val.location.dir-getLocation().dir)*Math.PI/180);
@@ -122,10 +122,12 @@ function toggleShowSelectedItem() {
   if(showItems) $('.br_to_lengthenpage').hide();
   else $('.br_to_lengthenpage').show();
 }
+var vibrating = false;
 
 function updatePositions() {
   var radartarget = null;
   var guard = false;
+
   $.each(items, function(key, val){
     var degree = val.location.dir;
     var actualDirection = degree+getLocation().dir;
@@ -146,7 +148,13 @@ function updatePositions() {
 
         $('#selectionCircle').attr("fill","url(#"+val.uri+"patternFull)");
         $('#mini-radar').css("color","red");
-        navigator.vibrate(100);
+        if(!vibrating){
+          navigator.vibrate(50);
+          vibrating = true;
+          setTimeout(function(){
+            vibrating = false;
+          }, 200);
+        }
         guard = true;
     } else if(!guard){
       $('#radartarget').html('none');

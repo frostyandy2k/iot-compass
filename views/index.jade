@@ -24,7 +24,7 @@ html
 
 
 body.container-fluid
-    header#explorerheader(role="navigation").row.materialshadow
+    header#explorerheader(role="navigation").row.navbar.materialshadow
         h1.pull-left #{title} Explorer
         a(href="#overviewbar").page-scroll.pull-right
             ul.list-inline
@@ -39,7 +39,7 @@ body.container-fluid
         button(onclick="toggleShowSelectedItem()") Toggle only show infront
         div#radartarget none
         //- img(src="img/Radar1.jpg")
-    header#overviewbar(role="navigation").row.navbar.materialshadow
+    header#overviewbar(role="navigation").row.materialshadow
         h1.pull-left #{title} Page
         a(href='#explorerheader').page-scroll.pull-right 
             ul.list-inline
@@ -48,19 +48,6 @@ body.container-fluid
                 li
                     span#mini-radar.glyphicon.glyphicon-dashboard
     section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
-        div.br_to_lengthenpage
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
         div#microwave(typeof='Product')
           h2(property='name') Kenmore White 17&quot; Microwave
           span(property='label', content='Mikrowelle')
@@ -93,13 +80,6 @@ body.container-fluid
           br
           br
           br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
         div#flower(typeof='Product')
           h2(property='name') Blume
           |         
@@ -110,13 +90,11 @@ body.container-fluid
           | e Blume.
           |         Man sollte die Blume alle 
           span(property='watering') 2
-          | .   
+          | Tage gießen.
+          br
+          span Current Plant humidity 67%. 
+          img.small(src="img/flower_happy.png", height="50px")   
         div.br_to_lengthenpage
-          br
-          br
-          br
-          br
-          br
           br
           br
           br

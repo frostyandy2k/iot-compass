@@ -51,6 +51,10 @@ img{
     transform: translateY(0px);
 }
 
+img.small{
+    height: 50px;
+}
+
 .headroom {
     transition: transform 200ms linear;
 }
