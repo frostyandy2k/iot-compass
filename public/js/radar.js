@@ -4,14 +4,32 @@ var currentorientation = {tiltLR: 0, tiltFB: 0, dir: 0};
 var items = [
   {uri: "microwave",
     location: {dir: 10},
-    color: "blue"},
+    color: "blue"
+  },
   {uri: "flower",
     location: {dir: 90},
-    color: "red"},
+    color: "red"
+  },
   {uri: "lamp",
     location: {dir: -90},
-    color: "white"}
+    color: "white",
+    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
+    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF"
+  }
 ];
+
+function generatePattern(svgparent, size, image, id){
+    svgparent.append("defs")
+      .append('pattern')
+        .attr('id', id)
+        .attr('patternUnits', 'objectBoundingBox')
+        .attr('width', 50)
+        .attr('height', 50)
+       .append("image")
+        .attr("xlink:href", image)
+        .attr('width', size)
+        .attr('height', size);
+  }
 
 function initRadar(divSelector) {
   $(divSelector).html('');
@@ -49,7 +67,41 @@ function initRadar(divSelector) {
   svg.append("circle")
     .attr("r", radarradius)
     .style("fill", "none")
-    .style("stroke", "rgba(0, 0, 0, 1)");
+    .style("stroke", "#ff6f00")
+    .attr("class", "svgshadow");
+
+  svg.append("circle")
+    .attr("r", radarradius*5/6)
+    .style("fill", "none")
+    .style("stroke", "#ff6f00")
+    .attr("class", "svgshadow");
+
+  svg.append("circle")
+    .attr("r", radarradius*2/3)
+    .style("fill", "none")
+    .style("stroke", "#ff6f00")
+    .attr("class", "svgshadow");
+
+  svg.append("circle")
+    .attr("r", radarradius/2)
+    .style("fill", "none")
+    .style("stroke", "#ff6f00")
+    .attr("class", "svgshadow");
+
+  svg.append("circle")
+    .attr("r", radarradius/3)
+    .attr("id", "selectionCircle")
+    .style("stroke", "#ff6f00")
+    // .attr("class", "svgshadow")
+    .attr("fill","url(#flowerpatternFull)");
+
+  generatePattern(svg, 50, "img/flower.png", 'flowerpattern');
+  generatePattern(svg, 100, "img/flower.png", 'flowerpatternFull');
+
+  generatePattern(svg, 50, "img/microwave.png", 'microwavepattern');
+  generatePattern(svg, 100, "img/microwave.png", 'microwavepatternFull');
+
+  generatePattern(svg, 50, "img/lamp.png", 'lamppattern');
 
   $.each(items, function(key, val){
     var x = radarradius*Math.sin((val.location.dir-getLocation().dir)*Math.PI/180);
@@ -60,7 +112,7 @@ function initRadar(divSelector) {
       .attr("r", itemradius)
       .attr("transform", "translate("+x+"," + y + ")")
       .style("stroke", "black")
-      .style("fill", val.color);
+      .attr("fill","url(#"+val.uri+"pattern)");
   });
 }
 var showItems = false;
@@ -92,6 +144,8 @@ function updatePositions() {
         // Only shows the content of the targeted item
         if(showItems) showItem(val.uri);
 
+        $('#selectionCircle').attr("fill","url(#"+val.uri+"patternFull)");
+
         navigator.vibrate(100);
         guard = true;
     } else if(!guard){
@@ -104,6 +158,7 @@ function updatePositions() {
       // shows all items (full page) if no item is directly in front
       if(showItems) showItem('all');
       guard = false;
+      $('#selectionCircle').attr("fill","none");
     }
     var x = radarradius*Math.sin(actualDirection*Math.PI/180);
     var y = -radarradius*Math.cos(actualDirection*Math.PI/180);
@@ -138,7 +193,9 @@ function resetOrientation() {
   orientationoffset.tiltFB = currentorientation.tiltFB;
   orientationoffset.dir = currentorientation.dir;
 }
+
 var initialResetDone = false;
+
 function init() {
   if (window.DeviceOrientationEvent) {
     // Listen for the deviceorientation event and handle the raw data
