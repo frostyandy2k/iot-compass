@@ -7,6 +7,7 @@ html
     //- link(rel='stylesheet', href='css/bootstrap-responsive.css') //probably already compiled into boostrap.min
     
     link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/bootstrap-theme.min.css')
     link(rel='stylesheet', href='startbootstrap-scrolling-nav-1.0.3/css/scrolling-nav.css')
     link(rel='stylesheet', href='css/style.css')
 
@@ -60,11 +61,6 @@ body.container-fluid
           br
           br
           br
-          br
-          br
-          br
-          br
-          br
         div#microwave(typeof='Product')
           h2(property='name') Kenmore White 17&quot; Microwave
           span(property='label', content='Mikrowelle')
@@ -104,12 +100,6 @@ body.container-fluid
           br
           br
           br
-          br
-          br
-          br
-          br
-          br
-          br
         div#flower(typeof='Product')
           h2(property='name') Blume
           |         
@@ -131,20 +121,18 @@ body.container-fluid
           br
           br
           br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
         div#lamp(typeof='Product')
           h2(property='name') Lampe
           |         
           img(height='130', width='110', src='img/lamp.png')
           br
           |         Ein Lampe die ihre Farbe wechselt, wenn sie Geräusche hört!
+          div#lampControls
+            div(data-toggle="buttons").btn-group.button-color
+                label.btn.btn-success(href='#') ON
+                    input(name="color",value="btn btn-default",type="radio")
+                label.btn.btn-warning(href='#') OFF
+                    input(name="color",value="btn btn-default",type="radio")
           
     script.
         //- supportsVibrate = "vibrate" in navigator;

@@ -145,7 +145,7 @@ function updatePositions() {
         if(showItems) showItem(val.uri);
 
         $('#selectionCircle').attr("fill","url(#"+val.uri+"patternFull)");
-
+        $('#mini-radar').css("color","red");
         navigator.vibrate(100);
         guard = true;
     } else if(!guard){
@@ -159,6 +159,7 @@ function updatePositions() {
       if(showItems) showItem('all');
       guard = false;
       $('#selectionCircle').attr("fill","none");
+      $('#mini-radar').css("color","blue");
     }
     var x = radarradius*Math.sin(actualDirection*Math.PI/180);
     var y = -radarradius*Math.cos(actualDirection*Math.PI/180);
