@@ -19,6 +19,7 @@ html
     script(src='startbootstrap-scrolling-nav-1.0.3/js/jquery.easing.min.js')
     script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
     script(src='http://d3js.org/d3.v3.min.js')
+    script(src='indiana.js')
     script(src='js/radar.js')
     script(src='js/headroom.min.js')
 
@@ -34,9 +35,8 @@ body.container-fluid
                     span.glyphicon.glyphicon-list-alt
     section#radar.page-section.row
         div#radardiv
-        button(onclick="resetOrientation()") Reset Device Orientation
-        button(onclick="turnDirection()") Turn Direction
-        button(onclick="toggleShowSelectedItem()") Toggle only show infront
+        button(onclick="resetIndianaOrientation()") Reset Device Orientation
+        //- button(onclick="toggleShowSelectedItem()") Toggle only show infront
         div#radartarget none
         //- img(src="img/Radar1.jpg")
     header#overviewbar(role="navigation").row.materialshadow
@@ -54,7 +54,7 @@ body.container-fluid
           <img src="img/microwave.png" alt='Kenmore 17" Microwave' />
           div(property='aggregateRating', typeof='AggregateRating')
             | Rated 
-            span(property='ratingValue') 3.5/5 
+            span(property='ratingitemue') 3.5/5 
             | based on
             span(property='reviewCount') 11
             | customer reviews
@@ -108,14 +108,39 @@ body.container-fluid
           div#lampControls
             div(data-toggle="buttons").btn-group.button-color
                 label.btn.btn-success(href='#') ON
-                    input(name="color",value="btn btn-default",type="radio")
+                    input(name="color",itemue="btn btn-default",type="radio")
                 label.btn.btn-warning(href='#') OFF
-                    input(name="color",value="btn btn-default",type="radio")
+                    input(name="color",itemue="btn btn-default",type="radio")
           
     script.
         //- supportsVibrate = "vibrate" in navigator;
         //- console.log('This device supports vibration: '+ supportsVibrate);
         //- alert(supportsVibrate);
+
+        var items = [
+          {uri: "microwave",
+            location: {dir: 350},
+            color: "blue"
+          },
+          {uri: "flower",
+            location: {dir: 270},
+            color: "red"
+          },
+          {uri: "lamp",
+            location: {dir: 80},
+            color: "white",
+            controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
+            controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF"
+          },
+          {uri: "coffeemachine",
+            location: {dir: 190},
+            color: "black"
+          },
+          {uri: "fridge",
+            location: {dir: 200},
+            color: "gray"
+          }
+        ];
         $(document).ready(function(){
             // grab an element
             var myElement = document.querySelector("#overviewbar");
@@ -140,7 +165,7 @@ body.container-fluid
             // initialise
             headroom.init(); 
 
-            init();
+            //- init();
             //- resetOrientation();
-            initRadar('#radardiv');
+            initRadar('#radardiv', items);
             });

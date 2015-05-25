@@ -1,22 +1,30 @@
 var orientationoffset = {tiltLR: 0, tiltFB: 0, dir: 0};
 var currentorientation = {tiltLR: 0, tiltFB: 0, dir: 0};
 
-var items = [
-  {uri: "microwave",
-    location: {dir: 10},
-    color: "blue"
-  },
-  {uri: "flower",
-    location: {dir: 90},
-    color: "red"
-  },
-  {uri: "lamp",
-    location: {dir: -90},
-    color: "white",
-    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
-    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF"
-  }
-];
+// var items = [
+//   {uri: "microwave",
+//     location: {dir: 10},
+//     color: "blue"
+//   },
+//   {uri: "flower",
+//     location: {dir: 90},
+//     color: "red"
+//   },
+//   {uri: "lamp",
+//     location: {dir: -90},
+//     color: "white",
+//     controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
+//     controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF"
+//   },
+//   {uri: "coffeemachine",
+//     location: {dir: 170},
+//     color: "black"
+//   },
+//   {uri: "fridge",
+//     location: {dir: 160},
+//     color: "gray"
+//   }
+// ];
 
 function generatePattern(svgparent, size, image, id){
     svgparent.append("defs")
@@ -30,8 +38,14 @@ function generatePattern(svgparent, size, image, id){
         .attr('width', size)
         .attr('height', size);
   }
-
-function initRadar(divSelector) {
+function generateCircle(svgparent, radius) {
+  svgparent.append("circle")
+    .attr("r", radius)
+    .style("fill", "none")
+    .style("stroke", "#ff6f00")
+    .attr("class", "svgshadow");
+}
+function initRadar(divSelector, items) {
   $(divSelector).html('');
   var spacetime = d3.select(divSelector);
 
@@ -51,7 +65,6 @@ function initRadar(divSelector) {
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
   var w = width/7;
-  var h = height/7;
   var center = svg.append("g")
       .append("svg:a")
       .attr("id", "radarButton")
@@ -60,33 +73,14 @@ function initRadar(divSelector) {
   center.append("svg:image")
       .attr("xlink:href", "img/arrow.png")
       .attr("x", -w/2)
-      .attr("y", -h/2)
+      .attr("y", -w/2)
       .attr("width", w)
-      .attr("height", h);
+      .attr("height", w);
 
-  svg.append("circle")
-    .attr("r", radarradius)
-    .style("fill", "none")
-    .style("stroke", "#ff6f00")
-    .attr("class", "svgshadow");
-
-  svg.append("circle")
-    .attr("r", radarradius*5/6)
-    .style("fill", "none")
-    .style("stroke", "#ff6f00")
-    .attr("class", "svgshadow");
-
-  svg.append("circle")
-    .attr("r", radarradius*2/3)
-    .style("fill", "none")
-    .style("stroke", "#ff6f00")
-    .attr("class", "svgshadow");
-
-  svg.append("circle")
-    .attr("r", radarradius/2)
-    .style("fill", "none")
-    .style("stroke", "#ff6f00")
-    .attr("class", "svgshadow");
+  generateCircle(svg, radarradius);
+  generateCircle(svg, radarradius*5/6);
+  generateCircle(svg, radarradius*2/3);
+  generateCircle(svg, radarradius/2);
 
   svg.append("circle")
     .attr("r", radarradius/3)
@@ -103,9 +97,16 @@ function initRadar(divSelector) {
   generatePattern(svg, 50, "img/lamp.png", 'lamppattern');
   generatePattern(svg, 100, "img/lamp.png", 'lamppatternFull');
 
+  generatePattern(svg, 50, "img/coffeemachine.jpg", 'coffeemachinepattern');
+  generatePattern(svg, 100, "img/coffeemachine.jpg", 'coffeemachinepatternFull');
+
+  generatePattern(svg, 50, "img/fridge.jpg", 'fridgepattern');
+  generatePattern(svg, 100, "img/fridge.jpg", 'fridgepatternFull');
+
+
   $.each(items, function(key, val){
-    var x = radarradius*Math.sin((val.location.dir-getLocation().dir)*Math.PI/180);
-    var y = -radarradius*Math.cos((val.location.dir-getLocation().dir)*Math.PI/180);
+    var x = -radarradius*Math.sin((val.location.dir)*Math.PI/180);
+    var y = -radarradius*Math.cos((val.location.dir)*Math.PI/180);
     // console.log(x,y)
     svg.append("circle")
       .attr("class", "items " + val.uri)
@@ -122,59 +123,20 @@ function toggleShowSelectedItem() {
   if(showItems) $('.br_to_lengthenpage').hide();
   else $('.br_to_lengthenpage').show();
 }
-var vibrating = false;
 
-function updatePositions() {
-  var radartarget = null;
-  var guard = false;
-
+function updatePositions(items, direction) {
   $.each(items, function(key, val){
     var degree = val.location.dir;
-    var actualDirection = degree+getLocation().dir;
+    var actualDirection = degree-direction;
     // console.log(getLocation().dir,actualDirection)
     // $('#radartarget1').html(Math.round(getLocation().dir) + " " + Math.round(actualDirection));
-    if(actualDirection < 5 && actualDirection > -5) {
-        radartarget = val.uri;
-        // console.log(radartarget)
-        $('#radartarget').html(radartarget);
-        // console.log($('#radarButton').find('image'))
-        
-        // adapt image and hyperlink
-        $('#radarButton').attr('href', '#' + val.uri);
-        $('#radarButton').find('image').attr('href', 'img/' + val.uri + '.png');
-
-        // Only shows the content of the targeted item
-        if(showItems) showItem(val.uri);
-
-        $('#selectionCircle').attr("fill","url(#"+val.uri+"patternFull)");
-        $('#mini-radar').css("color","red");
-        if(!vibrating){
-          navigator.vibrate(50);
-          vibrating = true;
-          setTimeout(function(){
-            vibrating = false;
-          }, 200);
-        }
-        guard = true;
-    } else if(!guard){
-      $('#radartarget').html('none');
-      
-      // reset image and hyperlink
-      $('#radarButton').attr('href', '#pagecontent');
-      $('#radarButton').find('image').attr('href', 'img/arrow.png');
-
-      // shows all items (full page) if no item is directly in front
-      if(showItems) showItem('all');
-      guard = false;
-      $('#selectionCircle').attr("fill","none");
-      $('#mini-radar').css("color","blue");
-    }
-    var x = radarradius*Math.sin(actualDirection*Math.PI/180);
+    var x = -radarradius*Math.sin(actualDirection*Math.PI/180);
     var y = -radarradius*Math.cos(actualDirection*Math.PI/180);
     d3.select("."+val.uri)
       .attr("transform", "translate("+x+", "+y+")");
   });
 }
+
 function showItem(uri) {
   $.each(items, function(key, value) {
     if(uri == 'all' || uri == value.uri) {
@@ -185,55 +147,70 @@ function showItem(uri) {
   })
 }
 
-function getLocation() {
-  var location = {};
-  location.dir = currentorientation.dir - orientationoffset.dir;
-  return location;
+var indiana;
+
+function resetIndianaOrientation() {
+  indiana.resetOrientation();
 }
 
-function turnDirection() {
-  currentorientation.dir += 10;
-  if(currentorientation.dir > 180) 
-      currentorientation.dir = currentorientation.dir-360;
-  updatePositions();
-}
-function resetOrientation() {
-  orientationoffset.tiltLR = currentorientation.tiltLR;
-  orientationoffset.tiltFB = currentorientation.tiltFB;
-  orientationoffset.dir = currentorientation.dir;
-}
+$(document).ready(function(){
+    indiana = spatialAwareness(items);
+    //- indiana.registerItems(items);
+    document.addEventListener('deviceorientation2', function(Orientation) {
+      updatePositions(items, Orientation.detail.dir);
+    })
+    var vibrating = true;
+    document.addEventListener('foundItemInFront', function(item) {
+      item = item.detail;
+      $('#radartarget').html(item.uri);
 
-var initialResetDone = false;
-
-function init() {
-  if (window.DeviceOrientationEvent) {
-    // Listen for the deviceorientation event and handle the raw data
-    window.addEventListener('deviceorientation', function(eventData) {
-      // gamma is the left-to-right tilt in degrees, where right is positive
-      var tiltLR = eventData.gamma;
-      
-      // beta is the front-to-back tilt in degrees, where front is positive
-      var tiltFB = eventData.beta;
-      
-      // alpha is the compass direction the device is facing in degrees
-      var dir = eventData.alpha;
-      
-      currentorientation.tiltLR = tiltLR;
-      currentorientation.tiltFB = tiltFB;
-      currentorientation.dir = (dir<0) ? 360+dir : dir;
-      if(!initialResetDone) {
-        resetOrientation();
-        initialResetDone = true;
+      $('#selectionCircle').attr("fill","url(#"+item.uri+"patternFull)");
+      $('#mini-radar').css("color","red");
+      if(!vibrating){
+        navigator.vibrate(50);
+        vibrating = true;
+        setTimeout(function(){
+          vibrating = false;
+        }, 200);
       }
-      // if(dir < orientationoffset.dir) {
-      //   dir = 360 - (orientationoffset.dir - dir);
-      // } else {
-      //   dir = dir - orientationoffset.dir;
-      // }
-      // call our orientation event handler
-      updatePositions();
-      }, false);
-  } else {
-    console.log("Device orientation is not supported on your device or browser.");
-  }
-}
+      //- updatePositions(items, indiana.getOrientation().dir);
+    })
+});
+// var initialResetDone = false;
+
+// function init() {
+//   if (window.DeviceOrientationEvent) {
+//     // Listen for the deviceorientation event and handle the raw data
+//     window.addEventListener('deviceorientation', function(eventData) {
+//       // gamma is the left-to-right tilt in degrees, where right is positive
+//       var tiltLR = eventData.gamma;
+      
+//       // beta is the front-to-back tilt in degrees, where front is positive
+//       var tiltFB = eventData.beta;
+      
+//       // alpha is the compass direction the device is facing in degrees
+//       var dir = eventData.alpha;
+      
+//       currentorientation.tiltLR = tiltLR;
+//       currentorientation.tiltFB = tiltFB;
+//       currentorientation.dir = (dir<0) ? 360+dir : dir;
+//       if(!initialResetDone) {
+//         resetOrientation();
+//         initialResetDone = true;
+//       }
+//       // if(dir < orientationoffset.dir) {
+//       //   dir = 360 - (orientationoffset.dir - dir);
+//       // } else {
+//       //   dir = dir - orientationoffset.dir;
+//       // }
+//       // call our orientation event handler
+
+//       count++;
+//       if(count % 10===1) {
+//         updatePositions();
+//       }
+//       }, false);
+//   } else {
+//     console.log("Device orientation is not supported on your device or browser.");
+//   }
+// }
