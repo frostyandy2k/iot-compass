@@ -172,8 +172,8 @@ function initListeners() {
     $('#mini_radar_selection').show();
     $('#mini_radar_selection').attr('src', 'img/' + item.uri + '.png');
  
-    if(!vibrating || (valURIold != val.uri)){
-      valURIold = val.uri;
+    if(!vibrating || (valURIold != item.uri)){
+      valURIold = item.uri;
       vibrating = true;
       navigator.vibrate(100);
     }
