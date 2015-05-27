@@ -59,6 +59,15 @@ img.small{
     transition: transform 200ms linear;
 }
 
+#mini_radar_selection{
+    height: 30px;
+}
+
+#mini_radar_icon{
+    font-size: 15pt;
+    vertical-align: sub;
+}
+
 ul{
     margin-bottom: 0px;
 }

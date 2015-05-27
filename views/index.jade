@@ -19,8 +19,9 @@ html
     script(src='startbootstrap-scrolling-nav-1.0.3/js/jquery.easing.min.js')
     script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
     script(src='http://d3js.org/d3.v3.min.js')
-    script(src='js/radar.js')
     script(src='js/headroom.min.js')
+    script(src='js/indiana.js')
+    script(src='js/radar.js')
 
 
 body.container-fluid
@@ -32,12 +33,13 @@ body.container-fluid
                     h2 Content
                 li
                     span.glyphicon.glyphicon-list-alt
+    div#svgtest
     section#radar.page-section.row
         div#radardiv
         button(onclick="resetOrientation()") Reset Device Orientation
         button(onclick="turnDirection()") Turn Direction
         button(onclick="toggleShowSelectedItem()") Toggle only show infront
-        div#radartarget none
+        div#radartarget(data-onSpatialFocusAction="alert('hello world)'") none
         //- img(src="img/Radar1.jpg")
     header#overviewbar(role="navigation").row.materialshadow
         h1.pull-left #{title} Page
@@ -46,7 +48,8 @@ body.container-fluid
                 li
                     h2 Radar
                 li
-                    span#mini-radar.glyphicon.glyphicon-dashboard
+                    span#mini_radar_icon.glyphicon.glyphicon-dashboard
+                    img#mini_radar_selection(src='img/flower.png')
     section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
         div#microwave(typeof='Product')
           h2(property='name') Kenmore White 17&quot; Microwave
