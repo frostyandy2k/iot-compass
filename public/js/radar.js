@@ -159,19 +159,24 @@ $(document).ready(function(){
     document.addEventListener('deviceorientation2', function(Orientation) {
       updatePositions(items, Orientation.detail.dir);
     })
-    var vibrating = true;
+
+    var vibrating = false;
+    var valURIold;
+
     document.addEventListener('foundItemInFront', function(item) {
       item = item.detail;
       $('#radartarget').html(item.uri);
 
       $('#selectionCircle').attr("fill","url(#"+item.uri+"patternFull)");
-      $('#mini-radar').css("color","red");
-      if(!vibrating){
-        navigator.vibrate(50);
+
+      $('#mini_radar_icon').hide();
+      $('#mini_radar_selection').show();
+      $('#mini_radar_selection').attr('src', 'img/' + item.uri + '.png');
+   
+      if(!vibrating || (valURIold != val.uri)){
+        valURIold = val.uri;
         vibrating = true;
-        setTimeout(function(){
-          vibrating = false;
-        }, 200);
+        navigator.vibrate(100);
       }
       //- updatePositions(items, indiana.getOrientation().dir);
     })
