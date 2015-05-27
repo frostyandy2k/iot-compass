@@ -10,6 +10,13 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
+server.use(function(req, res, next) {
+  //* allows all domains to make requests
+  res.header("Access-Control-Allow-Origin", "*");
+  //Allow header to specify what kind of request it was (XMLHttpRequest)
+  res.header("Access-Control-Allow-Headers", ["X-Requested-With", "Cache-Control"]);
+  next();
+}); 
 // db.batch()
 //   .put('microwave', '10')
 //   .put('flower', '90')

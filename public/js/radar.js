@@ -1,30 +1,6 @@
 var orientationoffset = {tiltLR: 0, tiltFB: 0, dir: 0};
 var currentorientation = {tiltLR: 0, tiltFB: 0, dir: 0};
 
-// var items = [
-//   {uri: "microwave",
-//     location: {dir: 10},
-//     color: "blue"
-//   },
-//   {uri: "flower",
-//     location: {dir: 90},
-//     color: "red"
-//   },
-//   {uri: "lamp",
-//     location: {dir: -90},
-//     color: "white",
-//     controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
-//     controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF"
-//   },
-//   {uri: "coffeemachine",
-//     location: {dir: 170},
-//     color: "black"
-//   },
-//   {uri: "fridge",
-//     location: {dir: 160},
-//     color: "gray"
-//   }
-// ];
 
 function generatePattern(svgparent, size, image, id){
     svgparent.append("defs")
@@ -37,7 +13,7 @@ function generatePattern(svgparent, size, image, id){
         .attr("xlink:href", image)
         .attr('width', size)
         .attr('height', size);
-  }
+}
 function generateCircle(svgparent, radius) {
   svgparent.append("circle")
     .attr("r", radius)
@@ -88,8 +64,8 @@ function initRadar(divSelector, items) {
     .style("stroke", "#ff6f00")
     .attr("fill","none");
 
-  generatePattern(svg, 50, "img/flower.png", 'flowerpattern');
-  generatePattern(svg, 100, "img/flower.png", 'flowerpatternFull');
+  generatePattern(svg, 50, "img/flower.jpg", 'flowerpattern');
+  generatePattern(svg, 100, "img/flower.jpg", 'flowerpatternFull');
 
   generatePattern(svg, 50, "img/microwave.png", 'microwavepattern');
   generatePattern(svg, 100, "img/microwave.png", 'microwavepatternFull');
@@ -147,75 +123,82 @@ function showItem(uri) {
   })
 }
 
+
 var indiana;
 
+var qrcodeactive = false;
+function readqrcode() {
+  if(qrcodeactive) {
+    indiana.deactivateQRCodeReader("#qrcodediv");
+    $("#qrcodediv").hide();
+    $("#radardiv").show();
+  } else {
+    $("#radardiv").hide();
+    $("#qrcodediv").show();
+    indiana.activateQRCodeReader("#qrcodediv", function(items) {
+      console.log("QRCode reader -> Items", items)
+      readqrcode();
+
+      initRadar('#radardiv', items);
+      initListeners();
+    });
+  }
+
+  qrcodeactive = !qrcodeactive;
+}
+
+function initListeners() {
+  document.addEventListener('deviceorientation2', function(data) {
+    // $("#qrcodedivdata").html(Math.round(Orientation.detail.dir));
+    // console.log("deviceorientation", data)
+    var dir = data.detail.orientation.dir;
+    var items = data.detail.items;
+    updatePositions(items, dir);
+  })
+  var vibrating = false;
+  document.addEventListener('noItemInFront', function() {
+    $('#radartarget').html("none");
+    $('#selectionCircle').attr("fill","none");
+    vibrating = false;
+    $('#mini_radar_icon').show();
+    $('#mini_radar_selection').hide();
+  })
+  document.addEventListener('foundItemInFront', function(item) {
+    item = item.detail;
+    $('#radartarget').html(item.uri);
+
+    $('#selectionCircle').attr("fill","url(#"+item.uri+"patternFull)");
+    $('#mini_radar_icon').hide();
+    $('#mini_radar_selection').show();
+    $('#mini_radar_selection').attr('src', 'img/' + item.uri + '.png');
+ 
+    if(!vibrating || (valURIold != val.uri)){
+      valURIold = val.uri;
+      vibrating = true;
+      navigator.vibrate(100);
+    }
+  })
+}
+function getIndianaData() {
+  indiana.getData(function(items) {
+    console.log("getData -> Items", items)
+    $("#radardiv").show();
+    initRadar('#radardiv', items);
+    initListeners();
+  });
+}
 function resetIndianaOrientation() {
   indiana.resetOrientation();
 }
+function hasGetUserMedia() {
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+$(document).ready(function() {
+    indiana = spatialAwareness();
+    $("#radardiv").hide();
+    $("#qrcodediv").hide();
 
-$(document).ready(function(){
-    indiana = spatialAwareness(items);
-    //- indiana.registerItems(items);
-    document.addEventListener('deviceorientation2', function(Orientation) {
-      updatePositions(items, Orientation.detail.dir);
-    })
-
-    var vibrating = false;
-    var valURIold;
-
-    document.addEventListener('foundItemInFront', function(item) {
-      item = item.detail;
-      $('#radartarget').html(item.uri);
-
-      $('#selectionCircle').attr("fill","url(#"+item.uri+"patternFull)");
-
-      $('#mini_radar_icon').hide();
-      $('#mini_radar_selection').show();
-      $('#mini_radar_selection').attr('src', 'img/' + item.uri + '.png');
-   
-      if(!vibrating || (valURIold != val.uri)){
-        valURIold = val.uri;
-        vibrating = true;
-        navigator.vibrate(100);
-      }
-      //- updatePositions(items, indiana.getOrientation().dir);
-    })
+    // if(hasGetUserMedia()) readqrcode();
+    // else console.log("Browser doesn't support video capture.")
 });
-// var initialResetDone = false;
-
-// function init() {
-//   if (window.DeviceOrientationEvent) {
-//     // Listen for the deviceorientation event and handle the raw data
-//     window.addEventListener('deviceorientation', function(eventData) {
-//       // gamma is the left-to-right tilt in degrees, where right is positive
-//       var tiltLR = eventData.gamma;
-      
-//       // beta is the front-to-back tilt in degrees, where front is positive
-//       var tiltFB = eventData.beta;
-      
-//       // alpha is the compass direction the device is facing in degrees
-//       var dir = eventData.alpha;
-      
-//       currentorientation.tiltLR = tiltLR;
-//       currentorientation.tiltFB = tiltFB;
-//       currentorientation.dir = (dir<0) ? 360+dir : dir;
-//       if(!initialResetDone) {
-//         resetOrientation();
-//         initialResetDone = true;
-//       }
-//       // if(dir < orientationoffset.dir) {
-//       //   dir = 360 - (orientationoffset.dir - dir);
-//       // } else {
-//       //   dir = dir - orientationoffset.dir;
-//       // }
-//       // call our orientation event handler
-
-//       count++;
-//       if(count % 10===1) {
-//         updatePositions();
-//       }
-//       }, false);
-//   } else {
-//     console.log("Device orientation is not supported on your device or browser.");
-//   }
-// }

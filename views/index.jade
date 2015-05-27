@@ -19,6 +19,8 @@ html
     script(src='startbootstrap-scrolling-nav-1.0.3/js/jquery.easing.min.js')
     script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
     script(src='http://d3js.org/d3.v3.min.js')
+    script(src='html5-qrcode-master/lib/jsqrcode-combined.min.js')
+    script(src='html5-qrcode-master/lib/html5-qrcode.min.js')
     script(src='indiana.js')
     script(src='js/radar.js')
     script(src='js/headroom.min.js')
@@ -36,6 +38,11 @@ body.container-fluid
                     img#mini_radar_selection
     section#radar.page-section.row
         div#radardiv
+        div#qrcodediv(style="width: 300px; height:200px")
+        div#qrcodedivdata
+        div#qrcodediverr
+        button(onclick="readqrcode()") Read QR code
+        button(onclick="getIndianaData()") Ask Indiana for Data
         button(onclick="resetIndianaOrientation()") Reset Device Orientation
         //- button(onclick="toggleShowSelectedItem()") Toggle only show infront
         div#radartarget none
@@ -84,7 +91,7 @@ body.container-fluid
         div#flower(typeof='Product')
           h2(property='name') Blume
           |         
-          img(height='120', width='120', src='img/flower.png', alt='rote Blume')
+          img(height='120', width='120', src='img/flower.jpg', alt='rote Blume')
           br
           |         Eine tolle 
           span(property='color') rot
@@ -117,31 +124,6 @@ body.container-fluid
         //- supportsVibrate = "vibrate" in navigator;
         //- console.log('This device supports vibration: '+ supportsVibrate);
         //- alert(supportsVibrate);
-
-        var items = [
-          {uri: "microwave",
-            location: {dir: 350},
-            color: "blue"
-          },
-          {uri: "flower",
-            location: {dir: 270},
-            color: "red"
-          },
-          {uri: "lamp",
-            location: {dir: 80},
-            color: "white",
-            controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
-            controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF"
-          },
-          {uri: "coffeemachine",
-            location: {dir: 190},
-            color: "black"
-          },
-          {uri: "fridge",
-            location: {dir: 200},
-            color: "gray"
-          }
-        ];
         $(document).ready(function(){
             // grab an element
             var myElement = document.querySelector("#overviewbar");
@@ -168,5 +150,4 @@ body.container-fluid
 
             //- init();
             //- resetOrientation();
-            initRadar('#radardiv', items);
             });
