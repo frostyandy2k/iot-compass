@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Refactored date examples</title>
+ 
+  <link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.18.0.css">
+  <script src="//code.jquery.com/qunit/qunit-1.18.0.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/indiana.js"></script>
+
+  <script>
+  QUnit.test("getThingPosition2DinDegree returns 5", function( assert ) {
+    assert.equal(indiana.getThingPosition2DinDegree(), 5);
+
+  });
+
+  QUnit.test("Test if Register and Dispatch event trigger registered function", function( assert ) {
+    $('body').append("<div id='target'></div>");
+    // $('body').append("<div id='testdiv'></div>");
+    var okstring = 'OK';
+
+    registerThingEvent('target', function() {
+     $('#target').text(okstring);
+    });
+
+    //indiana should have initialized event listeners
+    indiana.initializeEventListeners();
+
+    indiana.dispatchSpatialFocusEvent('target');
+
+    assert.equal($('#target').html(), okstring);
+
+    $('#target').remove();
+  });
+
+  
+  </script>
+</head>
+<body>
+ 
+<div id="qunit"></div>
+
+</body>
+</html>
