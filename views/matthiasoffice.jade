@@ -1,0 +1,133 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    //- link(rel='stylesheet', href='css/bootstrap-responsive.css') //probably already compiled into boostrap.min
+    
+    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/bootstrap-theme.min.css')
+    link(rel='stylesheet', href='startbootstrap-scrolling-nav-1.0.3/css/scrolling-nav.css')
+    link(rel='stylesheet', href='css/style.css')
+
+    //- use browserify
+    //- script(src='js/bundle.js')
+
+    script(src='js/jquery.js')
+    script(src='js/bootstrap.min.js')
+    script(src='startbootstrap-scrolling-nav-1.0.3/js/jquery.easing.min.js')
+    script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
+    script(src='http://d3js.org/d3.v3.min.js')
+    script(src='html5-qrcode-master/lib/jsqrcode-combined.min.js')
+    script(src='html5-qrcode-master/lib/html5-qrcode.min.js')
+    script(src='indiana.js')
+    script(src='js/radar.js')
+    script(src='js/headroom.min.js')
+
+
+body.container-fluid
+    header#explorerheader(role="navigation").row.navbar.materialshadow
+        h1.pull-left #{title} Explorer
+        a(href="#overviewbar").page-scroll.pull-right
+            ul.list-inline
+                li 
+                    h2 Content
+                li
+                    span.glyphicon.glyphicon-list-alt
+    section#radar.page-section.row
+        div#radardiv
+        div#qrcodediv(style="width: 300px; height:200px")
+        div#qrcodedivdata
+        div#qrcodediverr
+        button(onclick="readqrcode()") Read QR code
+        button(onclick="getIndianaData()") Ask Indiana for Data
+        button(onclick="resetIndianaOrientation()") Reset Device Orientation
+        //- button(onclick="toggleShowSelectedItem()") Toggle only show infront
+        div#radartarget none
+        //- img(src="img/Radar1.jpg")
+    header#overviewbar(role="navigation").row.materialshadow
+        h1.pull-left #{title} Page
+        a(href='#explorerheader').page-scroll.pull-right 
+            ul.list-inline
+                li
+                    h2 Radar
+                li
+                    span#mini_radar_icon.glyphicon.glyphicon-dashboard
+                    img#mini_radar_selection
+    section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
+        div#microwave(typeof='Product')
+          h2(property='name') Google Cardboard
+          span(property='label', content='Google Cardboard')
+          <img src="img/cardboard.png" alt="Google Cardboard" />
+          br
+          span(property='description')
+           | Das Google cardboard, super zu nutzen auf <a href='http://demo.optonaut.com'> demo.optonaut.com </a>.
+        div.br_to_lengthenpage
+          br
+          br
+          br
+          br
+        div#flower(typeof='Product')
+          h2(property='name') Blume
+          |         
+          img(height='120', width='120', src='img/flower.jpg', alt='rote Blume')
+          br
+          |         Eine tolle 
+          span(property='color') rot
+          | e Blume.
+          |         Man sollte die Blume alle 
+          span(property='watering') 2
+          | Tage gießen.
+          br
+          span Current Plant humidity 67%. 
+          img.small(src="img/flower_happy.png", height="50px")   
+        div.br_to_lengthenpage
+          br
+          br
+          br
+          br
+        div#lamp(typeof='Person')
+          h2(property='name') Matthias Budde
+          |         
+          img(height='130', width='110', src='img/budde.png')
+          br
+          | Der liebe Kollege.
+          div#lampControls
+            div(data-toggle="buttons").btn-group.button-color
+                label.btn.btn-success(href='#') ON
+                    input(name="color",itemue="btn btn-default",type="radio")
+                label.btn.btn-warning(href='#') OFF
+                    input(name="color",itemue="btn btn-default",type="radio")
+          
+    script.
+        //- supportsVibrate = "vibrate" in navigator;
+        //- console.log('This device supports vibration: '+ supportsVibrate);
+        //- alert(supportsVibrate);
+        $(document).ready(function(){
+            // grab an element
+            var myElement = document.querySelector("#overviewbar");
+            // construct an instance of Headroom, passing the element
+            var headroom  = new Headroom(myElement, {
+                      "offset": 462,
+                      "tolerance": 0,
+                      "classes": {
+                        "notTop" : "fixed"
+                      },
+                      onTop : function() {
+                        document.querySelector('#pagecontent').style.paddingTop = '0px';
+                        $('#mini-radar').hide();
+                      },
+                      onNotTop : function() {
+                        height = document.querySelector('#explorerheader').offsetHeight + document.querySelector('#radar').offsetHeight;
+                        myElement.style.top = height;
+                        document.querySelector('#pagecontent').style.paddingTop = '54px';
+                        $('#mini-radar').show();
+                      console.log("Show minified Radar!" + height)}
+                    });
+            // initialise
+            headroom.init(); 
+
+            //- init();
+            //- resetOrientation();
+            });
