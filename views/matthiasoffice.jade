@@ -38,13 +38,13 @@ body.container-fluid
     section#radar.page-section.row
         div#radardiv
         div#qrcodediv(style="width: 300px; height:200px")
-        div#qrcodedivdata
-        div#qrcodediverr
-        button(onclick="readqrcode()") Read QR code
-        button(onclick="getIndianaData()") Ask Indiana for Data
-        button(onclick="resetIndianaOrientation()") Reset Device Orientation
+        //- div#qrcodedivdata
+        //- div#qrcodediverr
+        //- button(onclick="readqrcode()") Read QR code
+        //- button(onclick="getIndianaData()") Ask Indiana for Data
+        //- button(onclick="resetIndianaOrientation()") Reset Device Orientation
+        //- div#radartarget none
         //- button(onclick="toggleShowSelectedItem()") Toggle only show infront
-        div#radartarget none
         //- img(src="img/Radar1.jpg")
     header#overviewbar(role="navigation").row.materialshadow
         h1.pull-left #{title} Page
@@ -56,7 +56,7 @@ body.container-fluid
                     span#mini_radar_icon.glyphicon.glyphicon-dashboard
                     img#mini_radar_selection
     section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
-        div#microwave(typeof='Product')
+        div#cardboard(typeof='Product')
           h2(property='name') Google Cardboard
           span(property='label', content='Google Cardboard')
           <img src="img/cardboard.png" alt="Google Cardboard" />
@@ -87,7 +87,7 @@ body.container-fluid
           br
           br
           br
-        div#lamp(typeof='Person')
+        div#budde(typeof='Person')
           h2(property='name') Matthias Budde
           |         
           img(height='130', width='110', src='img/budde.png')

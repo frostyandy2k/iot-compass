@@ -43,8 +43,8 @@ body.container-fluid
         //- button(onclick="readqrcode()") Read QR code
         //- button(onclick="getIndianaData()") Ask Indiana for Data
         //- button(onclick="resetIndianaOrientation()") Reset Device Orientation
-        //- div#radartarget none
         //- button(onclick="toggleShowSelectedItem()") Toggle only show infront
+        //- div#radartarget none
         //- img(src="img/Radar1.jpg")
     header#overviewbar(role="navigation").row.materialshadow
         h1.pull-left #{title} Page
@@ -56,24 +56,34 @@ body.container-fluid
                     span#mini_radar_icon.glyphicon.glyphicon-dashboard
                     img#mini_radar_selection
     section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
-        div#thesis(typeof='Product')
-          h2(property='name' uri='www.teco.edu/users/~unseld/bachelorarbeit') Jack's Bachelorarbeit
-          span(property='label', content='Bachelorarbeit')
-          <img src="img/thesis.png" alt="Jack's Bachelorarbeit" />
+        div#microwave(typeof='Product')
+          h2(property='name') Kenmore White 17&quot; Microwave
+          span(property='label', content='Mikrowelle')
+          <img src="img/microwave.png" alt='Kenmore 17" Microwave' />
           div(property='aggregateRating', typeof='AggregateRating')
             | Rated 
-            span(property='ratingitemue') 1.0 
-            | based on 
-            span(property='reviewCount') 3 
-            | academic reviewers.
+            span(property='ratingitemue') 3.5/5 
+            | based on
+            span(property='reviewCount') 11
+            | customer reviews
+          div(property='offers', typeof='Offer')
+            | Cost:
+            span(property='priceCurrency', content='USD') $
+            span(property='price', content='1000.00') 1,000.00
+            |           
             br
-            p Availability:
-              |         
-              link(property='availability', href='http://schema.org/InStock')
-              | Coming soon to a library near you.
-              |       
+            |         Availability:
+            |         
+            link(property='availability', href='http://schema.org/InStock')
+            | In stock
+            | Product description:
+            |       
           span(property='description')
-            | 
+            | 0.7 cubic feet countertop microwave.
+            | Has six preset cooking categories and convenience features like
+            | Add-A-Minute and Child Lock.
+            |     
+          p#microwavePosition
         div.br_to_lengthenpage
           br
           br
@@ -93,23 +103,25 @@ body.container-fluid
           br
           span Current Plant humidity 67%. 
           img.small(src="img/flower_happy.png", height="50px")   
+          p#flowerPosition
         div.br_to_lengthenpage
           br
           br
           br
           br
-        div#telephone(typeof='Telephone')
-          h2(property='name') Telefon
+        div#lamp(typeof='Product')
+          h2(property='name') Lampe
           |         
-          img(height='130', width='110', src='img/telephone.png')
+          img(height='130', width='110', src='img/lamp.png')
           br
-          | Der direkte Draht zu Till Riedel!
+          |         Ein Lampe die ihre Farbe wechselt, wenn sie Geräusche hört!
           div#lampControls
             div(data-toggle="buttons").btn-group.button-color
                 label.btn.btn-success(href='#') ON
                     input(name="color",itemue="btn btn-default",type="radio")
                 label.btn.btn-warning(href='#') OFF
                     input(name="color",itemue="btn btn-default",type="radio")
+          p#lampPosition
           
     script.
         //- supportsVibrate = "vibrate" in navigator;
