@@ -91,13 +91,13 @@ function initRadar(divSelector, items) {
     var x = -radarradius*Math.sin((val.location.dir)*Math.PI/180);
     var y = -radarradius*Math.cos((val.location.dir)*Math.PI/180);
     // console.log(x,y)
-      // .append("svg:a")
-      // .attr("class", "page-scroll")
-      // .attr("xlink:href", "#"+key)
+      // .attr("onclick", "$('#"+key+"')[0].scrollIntoView()")
+      // .attr("cursor", "pointer")
     svg
+      .append("svg:a")
+      .attr("class", "page-scroll")
+      .attr("xlink:href", "#"+key)
       .append("circle")
-      .attr("onclick", "$('#"+key+"')[0].scrollIntoView()")
-      .attr("cursor", "pointer")
       .attr("id", key+"radar")
       .attr("r", itemradius)
       .attr("transform", "translate("+x+"," + y + ")")
@@ -175,6 +175,11 @@ function initListeners() {
     vibrating = false;
     $('#mini_radar_icon').show();
     $('#mini_radar_selection').hide();
+    var button = d3.select('#radarButton')
+    button.attr("xlink:href", "#pagecontent")
+    button.select('image')
+      .attr('xlink:href', 'img/arrow.png');
+ 
   })
   document.addEventListener('foundItemInFront', function(item) {
     item = item.detail;
@@ -184,6 +189,10 @@ function initListeners() {
     $('#mini_radar_icon').hide();
     $('#mini_radar_selection').show();
     $('#mini_radar_selection').attr('src', 'img/' + item.key + '.png');
+    var button = d3.select('#radarButton');
+    button.attr("xlink:href", "#"+item.key)
+    button.select('image')
+      .attr('xlink:href', 'img/' + item.key + '.png');
  
     if(!vibrating || (valURIold != item.key)){
       valURIold = item.key;
