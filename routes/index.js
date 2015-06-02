@@ -17,7 +17,78 @@ router.get('/tillsoffice', function(req, res) {
 router.get('/matthiasoffice', function(req, res) {
   res.render('matthiasoffice', { title: 'Matthias Office' });
 });
+router.get('/livinglab', function(req, res) {
+  res.render('livinglab');
+});
 
+router.get('/livinglab/items', function(req, res) {
+	var livinglab_items = {
+	  "EmbeddedBusinessSystems": {
+	    location: {dir: 50},
+	    img: "demosTECOIntranet/EBS_front.JPG"
+	  },
+	  "VDAR": {
+	    location: {dir: 60},
+	    img: "demosTECOIntranet/VDAR_Logo.jpg"
+	  },
+	  "AudioLedLampe": {
+	    location: {dir: 40},
+	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
+	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
+	  },
+	  "AudioLedLampe1": {
+	    location: {dir: 150},
+	    status: false,
+	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
+	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
+	  },
+	  "AudioLedLampe2": {
+	    location: {dir: 240},
+	    status: false,
+	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
+	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
+	  },
+	  "AudioLedLampe3": {
+	    location: {dir: 290},
+	    status: false,
+	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
+	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
+	  },
+	  "TecoEnvboard": {
+	    location: {dir: 200},
+	    img: "demosTECOIntranet/envboard-demo-neu.jpg",
+	  },
+	  "PointAndClick": {
+	    location: {dir: 180},
+	    img: "demosTECOIntranet/ThumbPointAndClick.jpg",
+	  },
+	  "MachineHealthDemo": {
+	    location: {dir: 260},
+	    img: "demosTECOIntranet/ThumbMachineHealth.jpg",
+	  },
+	  "LandmarkeDemo": {
+	    location: {dir: 300},
+	    img: "demosTECOIntranet/Landmarke%20Demo.jpg",
+	  },
+	  "RfidCollaborativeCommunicationDemo": {
+	    location: {dir: 230},
+	    img: "demosTECOIntranet/ThumbRfidCollab.jpg",
+	  },
+	  "HealthCareDemo": {
+	    location: {dir: 210},
+	    img: "demosTECOIntranet/ThumbKneeGuard.jpg",
+	  },
+	  "LedPowerDemo": {
+	    location: {dir: 130},
+	    img: "demosTECOIntranet/ThumbLedPower.jpg",
+	  }
+	};
+  res.json(livinglab_items);
+});
 
 router.get('/kitchen/items', function(req, res) {
 	var kitchen_items = {

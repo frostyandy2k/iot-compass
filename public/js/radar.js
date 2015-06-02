@@ -4,29 +4,35 @@ var currentorientation = {tiltLR: 0, tiltFB: 0, dir: 0};
 
 function generatePattern(svgparent, size, image, id){
     svgparent.append("defs")
+      .attr('aria-hidden',true)
       .append('pattern')
         .attr('id', id)
         .attr('patternUnits', 'objectBoundingBox')
-        .attr('width', 50)
-        .attr('height', 50)
+        .attr('width', 100)
+        .attr('height', 100)
        .append("image")
         .attr("xlink:href", image)
-        .attr('width', size)
-        .attr('height', size);
+        .attr('width', '100')
+        .attr('height', '100');
 }
 function generateCircle(svgparent, radius) {
   svgparent.append("circle")
     .attr("r", radius)
+    .attr('aria-hidden',true)
     .style("fill", "none")
     .style("stroke", "#ff6f00")
     .attr("class", "svgshadow");
 }
 function initRadar(divSelector, items) {
   $(divSelector).html('');
+  $(divSelector).append("<ul id='itemslist' aria-hidden=false aria-label='Help Info'/>");
+  var ul = $(divSelector).find('ul');
+  ul.hide();
+
   var spacetime = d3.select(divSelector);
 
-  var svgWidth = 370;
-  var svgHeight = 370;
+  var svgWidth = $(window).width();
+  var svgHeight = $(window).height();
 
   var width = svgWidth,
       height = svgHeight,
@@ -34,20 +40,32 @@ function initRadar(divSelector, items) {
       radarradius = Math.round(radius/2.5);
       itemradius = Math.round(radarradius/8);
 
+    // .attr('aria-hidden',true)
   var svg = spacetime.append("svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr('role','listbox')
+    .attr('aria-describeby','itemslist')
+    .attr("width", radius)
+    .attr("height", radius)
     .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("transform", "translate(" + radius / 2 + "," + radius / 2 + ")");
 
-  var w = width/7;
+  var w = radius/7;
   var center = svg.append("g")
       .append("svg:a")
       .attr("id", "radarButton")
-      .attr("class", "page-scroll")
-      .attr("xlink:href", "#pagecontent");
+      .attr("xlink:href", "#pagecontent")
+      .attr('aria-hidden',true)
+      // .attr('role', 'Nothing is in front of you.');
   center.append("svg:image")
       .attr("xlink:href", "img/arrow.png")
+      .attr("x", -w/2)
+      .attr("y", -w/2)
+      .attr("width", w)
+      .attr("height", w);
+  w = radius/5
+  center.append("svg:image")
+      .attr("id", "radarTargetImage")
+      // .attr("xlink:href", "img/arrow.png")
       .attr("x", -w/2)
       .attr("y", -w/2)
       .attr("width", w)
@@ -60,26 +78,14 @@ function initRadar(divSelector, items) {
 
   svg.append("circle")
     .attr("r", radarradius/3)
+    .attr('aria-hidden',true)
     .attr("id", "selectionCircle")
     .style("stroke", "#ff6f00")
     .attr("fill","none");
 
-  // generatePattern(svg, 50, "img/flower.jpg", 'flowerpattern');
-  // generatePattern(svg, 100, "img/flower.jpg", 'flowerpatternFull');
-
-  // generatePattern(svg, 50, "img/microwave.png", 'microwavepattern');
-  // generatePattern(svg, 100, "img/microwave.png", 'microwavepatternFull');
-
-  // generatePattern(svg, 50, "img/lamp.png", 'lamppattern');
-  // generatePattern(svg, 100, "img/lamp.png", 'lamppatternFull');
-
-  // generatePattern(svg, 50, "img/coffeemachine.jpg", 'coffeemachinepattern');
-  // generatePattern(svg, 100, "img/coffeemachine.jpg", 'coffeemachinepatternFull');
-
-  // generatePattern(svg, 50, "img/fridge.jpg", 'fridgepattern');
-  // generatePattern(svg, 100, "img/fridge.jpg", 'fridgepatternFull');
-
   $.each(items, function(key, val){
+    // $(divSelector).find('list')[0].append
+    ul.append('<li>'+key+' blub blub</li>')
     if(val.img) {
       generatePattern(svg, 50, val.img, key+'pattern');
       generatePattern(svg, 100, val.img, key+'patternFull');
@@ -93,15 +99,23 @@ function initRadar(divSelector, items) {
     // console.log(x,y)
       // .attr("onclick", "$('#"+key+"')[0].scrollIntoView()")
       // .attr("cursor", "pointer")
-    svg
-      .append("svg:a")
-      .attr("class", "page-scroll")
+    var color = "black";
+    if(val.status != undefined && !val.status) {
+      color = "red";
+    }
+    svg.append("svg:a")
       .attr("xlink:href", "#"+key)
+      // .attr('aria-hidden',true)
+      .attr('role','link to '+key+' using role')
+      .attr('title','link to '+key)
       .append("circle")
+      .attr('role',key+' role')
+      .attr('title',key)
       .attr("id", key+"radar")
       .attr("r", itemradius)
+      .style("stroke-width", 3)
+      .style("stroke", color)
       .attr("transform", "translate("+x+"," + y + ")")
-      .style("stroke", "black")
       .attr("fill","url(#"+key+"pattern)");
   });
 }
@@ -168,37 +182,47 @@ function initListeners() {
     var items = data.detail.items;
     updatePositions(items, dir);
   })
+  var valURIold;
   var vibrating = false;
   document.addEventListener('noItemInFront', function() {
     $('#radartarget').html("none");
-    $('#selectionCircle').attr("fill","none");
+    // $('#selectionCircle').attr("fill","none");
     vibrating = false;
+
     $('#mini_radar_icon').show();
     $('#mini_radar_selection').hide();
     var button = d3.select('#radarButton')
     button.attr("xlink:href", "#pagecontent")
-    button.select('image')
-      .attr('xlink:href', 'img/arrow.png');
- 
+    // button.select('image')
+    //   .attr('xlink:href', 'img/arrow.png')
+    $('#radarTargetImage').hide();
   })
   document.addEventListener('foundItemInFront', function(item) {
     item = item.detail;
     $('#radartarget').html(item.key);
 
-    $('#selectionCircle').attr("fill","url(#"+item.key+"patternFull)");
     $('#mini_radar_icon').hide();
     $('#mini_radar_selection').show();
     $('#mini_radar_selection').attr('src', 'img/' + item.key + '.png');
     var button = d3.select('#radarButton');
     button.attr("xlink:href", "#"+item.key)
-    button.select('image')
-      .attr('xlink:href', 'img/' + item.key + '.png');
- 
-    if(!vibrating || (valURIold != item.key)){
-      valURIold = item.key;
-      vibrating = true;
-      navigator.vibrate(100);
+    if(item.value.img) {
+      // button.select('image')
+      //   .attr('xlink:href', item.value.img)
+      d3.select('#radarTargetImage').attr('xlink:href', item.value.img)
+    } else {
+      // button.select('image')
+      //   .attr('xlink:href', 'img/' + item.key + '.png')
+      d3.select('#radarTargetImage').attr('xlink:href', 'img/' + item.key + '.png')
     }
+    $('#radarTargetImage').show();
+    // $('#selectionCircle').attr("fill","url(#"+item.key+"pattern)");
+
+    valURIold = item.key;
+    if(!vibrating || (valURIold != item.key)){
+      vibrating = true;
+      // navigator.vibrate(100);
+    } 
   })
 }
 function getIndianaData() {
@@ -225,7 +249,7 @@ function applyLocationTextChildren(registeredThings){
   $.each(registeredThings, function(key, value) {
     var location = indiana.getThingCardinalPosition(key);
     var id = '#' + key;
-    console.log(location)
+    // console.log(location)
     // if (!$(id+"Position")) $(id).append('<p id="'+id+'Position"></p>');
     switch(location) {
       case 'N': createLocationText(id, key, 'in front'); break;
@@ -242,7 +266,11 @@ function applyLocationTextChildren(registeredThings){
 
 function createLocationText(id, thing, location, no_of){
     var of = no_of ? '' : ' of';
-    $(id+"Position").html("<strong>The "+thing+" is "+location+of+" you.</strong>");
+    // if(location == 'in front') {
+    //   $(id+"Position").html("<strong aria-live=true>The "+thing+" is "+location+of+" you.</strong>");
+    // } else {
+      $(id+"Position").html("<strong>The "+thing+" is "+location+of+" you.</strong>");
+    // }
 }
 
 $(document).ready(function() {
