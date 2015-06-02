@@ -24,68 +24,65 @@ router.get('/livinglab', function(req, res) {
 router.get('/livinglab/items', function(req, res) {
 	var livinglab_items = {
 	  "EmbeddedBusinessSystems": {
-	    location: {dir: 50},
+	    location: {dir: 40},
 	    img: "demosTECOIntranet/EBS_front.JPG"
 	  },
 	  "VDAR": {
-	    location: {dir: 60},
+	    location: {dir: 50},
 	    img: "demosTECOIntranet/VDAR_Logo.jpg"
 	  },
 	  "AudioLedLampe": {
-	    location: {dir: 40},
-	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
-	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    location: {dir: 30},
+	    status: false,
+	    controlON: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/on",
+	    controlOFF: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/off",
 	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
+	  },
+	  "LedPowerDemo": {
+	    location: {dir: 95},
+	    img: "demosTECOIntranet/ThumbLedPower.jpg",
 	  },
 	  "AudioLedLampe1": {
-	    location: {dir: 150},
-	    status: false,
-	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
-	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    location: {dir: 115},
+	    status: true,
 	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
 	  },
+	  "PointAndClick": {
+	    location: {dir: 155},
+	    img: "demosTECOIntranet/ThumbPointAndClick.jpg",
+	  },
+	  "HealthCareDemo": {
+	    location: {dir: 165},
+	    img: "demosTECOIntranet/ThumbKneeGuard.jpg",
+	  },
+	  "TecoEnvboard": {
+	    location: {dir: 180},
+	    img: "demosTECOIntranet/envboard-demo-neu.jpg",
+	  },
+	  "RfidCollaborativeCommunicationDemo": {
+	    location: {dir: 220},
+	    img: "demosTECOIntranet/ThumbRfidCollab.jpg",
+	  },
 	  "AudioLedLampe2": {
-	    location: {dir: 240},
+	    location: {dir: 230},
 	    status: false,
-	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
-	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    controlON: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/on",
+	    controlOFF: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off",
 	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
+	  },
+	  "MachineHealthDemo": {
+	    location: {dir: 245},
+	    img: "demosTECOIntranet/ThumbMachineHealth.jpg",
 	  },
 	  "AudioLedLampe3": {
 	    location: {dir: 290},
-	    status: false,
-	    controlON: "http://cumulus.teco.edu:81/21345gjphtnch87/ON",
-	    controlOFF: "http://cumulus.teco.edu:81/21345gjphtnch87/OFF",
+	    status: true,
 	    img: "demosTECOIntranet/ThumbAudioLed.jpg"
-	  },
-	  "TecoEnvboard": {
-	    location: {dir: 200},
-	    img: "demosTECOIntranet/envboard-demo-neu.jpg",
-	  },
-	  "PointAndClick": {
-	    location: {dir: 180},
-	    img: "demosTECOIntranet/ThumbPointAndClick.jpg",
-	  },
-	  "MachineHealthDemo": {
-	    location: {dir: 260},
-	    img: "demosTECOIntranet/ThumbMachineHealth.jpg",
 	  },
 	  "LandmarkeDemo": {
 	    location: {dir: 300},
 	    img: "demosTECOIntranet/Landmarke%20Demo.jpg",
 	  },
-	  "RfidCollaborativeCommunicationDemo": {
-	    location: {dir: 230},
-	    img: "demosTECOIntranet/ThumbRfidCollab.jpg",
-	  },
-	  "HealthCareDemo": {
-	    location: {dir: 210},
-	    img: "demosTECOIntranet/ThumbKneeGuard.jpg",
-	  },
-	  "LedPowerDemo": {
-	    location: {dir: 130},
-	    img: "demosTECOIntranet/ThumbLedPower.jpg",
-	  }
 	};
   res.json(livinglab_items);
 });

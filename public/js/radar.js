@@ -8,12 +8,12 @@ function generatePattern(svgparent, size, image, id){
       .append('pattern')
         .attr('id', id)
         .attr('patternUnits', 'objectBoundingBox')
-        .attr('width', 100)
-        .attr('height', 100)
+        .attr('width', size/2)
+        .attr('height', size/2)
        .append("image")
         .attr("xlink:href", image)
-        .attr('width', '100')
-        .attr('height', '100');
+        .attr('width', size)
+        .attr('height', size);
 }
 function generateCircle(svgparent, radius) {
   svgparent.append("circle")
@@ -87,11 +87,11 @@ function initRadar(divSelector, items) {
     // $(divSelector).find('list')[0].append
     ul.append('<li>'+key+' blub blub</li>')
     if(val.img) {
-      generatePattern(svg, 50, val.img, key+'pattern');
+      generatePattern(svg, itemradius*2, val.img, key+'pattern');
       generatePattern(svg, 100, val.img, key+'patternFull');
     } else {
       var img = "img/" + key + ".png"
-      generatePattern(svg, 50, img, key+'pattern');
+      generatePattern(svg, itemradius*2, img, key+'pattern');
       generatePattern(svg, 100, img, key+'patternFull');
     }
     var x = -radarradius*Math.sin((val.location.dir)*Math.PI/180);
@@ -133,10 +133,15 @@ function updatePositions(items, direction) {
     var actualDirection = degree-direction;
     // console.log(getLocation().dir,actualDirection)
     // $('#radartarget1').html(Math.round(getLocation().dir) + " " + Math.round(actualDirection));
+    // var color = "black";
+    // if(val.status != undefined && !val.status) {
+    //   color = "red";
+    //   .attr("stroke", color)
+    // }
     var x = -radarradius*Math.sin(actualDirection*Math.PI/180);
     var y = -radarradius*Math.cos(actualDirection*Math.PI/180);
     d3.select("#"+key+"radar")
-      .attr("transform", "translate("+x+", "+y+")");
+      .attr("transform", "translate("+x+", "+y+")")
   });
 }
 

@@ -95,10 +95,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       | demos – TecO Intranet
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    //if IE
-      script(type='text/javascript').
-        if (/^#__msie303:/.test(window.location.hash))
-        window.location.replace(window.location.hash.replace(/^#__msie303:/, '#'));
+    //- meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
     link(rel='search', href='/projects/admin/search')
     link(rel='help', href='/projects/admin/wiki/TracGuide')
     link(rel='alternate', href='/projects/admin/wiki/demos?format=txt', type='text/x-trac-wiki', title='Plain Text')
@@ -108,12 +106,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     link(rel='shortcut icon', href='demosTECOIntranet/trac.ico', type='image/x-icon')
     link(rel='icon', href='demosTECOIntranet/trac.ico', type='image/x-icon')
     link(type='application/opensearchdescription+xml', rel='search', href='/projects/admin/search/opensearch', title='Search TecO Intranet')
+    //- link(rel='stylesheet', href='css/bootstrap.min.css')
+    //- link(rel='stylesheet', href='css/bootstrap-theme.min.css')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/jquery.js')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/babel.js')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/trac.js')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/search.js')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/folding.js')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/tracsectionedit.js')
+    //- script(src='js/bootstrap.min.js')
     script(type='text/javascript', charset='utf-8', src='http://d3js.org/d3.v3.min.js')
     script(type='text/javascript', charset='utf-8', src='indiana.js')
     script(type='text/javascript', charset='utf-8', src='js/radar.js')
@@ -220,6 +221,33 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   |  Die Audio LED Demo visualisiert die Umgebungslautstärke.
                   p
                     | Lampen müssen manuell eingeschaltet werden. Nach dem Einschalten ist mit einer kurzen Verzögerung zu rechnen.
+                  div#lampControls
+                    script.
+                      function turnLamp(id,url) {
+                        $.get(url, function(data, status) {
+                          console.log(status,data) // wird nicht ausgegeben...
+                          //- if(data.plugwise.state == 'on') {
+                          //-   color = 'black';
+                          //- }
+                        })
+                        var color = 'red';
+                        if(url.indexOf('on') >0) color='black'
+                        d3.select('#'+id+'radar').style('stroke',color);
+                      }
+                    p AudioLedLampe:
+                      div(data-toggle="buttons").btn-group.button-color
+                        button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/on')") ON
+                        button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off')") OFF
+                    p AudioLedLampe1: Controls are currently unavailable.
+                    p AudioLedLampe2: 
+                      div(data-toggle="buttons").btn-group.button-color
+                        button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/on')") ON
+                        button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/off')") OFF
+                    p AudioLedLampe3: Controls are currently unavailable.
+                          //- label.btn.btn-success(href='#radardiv') ON
+                          //-     input(name="color",itemue="btn btn-default",type="radio")
+                          //- label.btn.btn-warning(href='http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off') OFF
+                          //-     input(name="color",itemue="btn btn-default",type="radio")
               tr#MachineHealthDemo
                 td
                   a(style='padding:0; border:none', href='demosTECOIntranet/ThumbMachineHealth.jpg')
