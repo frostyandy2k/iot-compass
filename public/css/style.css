@@ -72,4 +72,8 @@ ul{
     margin-bottom: 0px;
 }
 
+#overviewbar{
+    z-index: 100;
+}
+
 /*radar color: #ff6f00*/
