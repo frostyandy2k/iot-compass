@@ -1,93 +1,3 @@
-//- doctype html
-//- html
-//-   head
-//-     title= title
-//-     meta(charset="utf-8")
-//-     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-//-     //- link(rel='stylesheet', href='css/bootstrap-responsive.css') //probably already compiled into boostrap.min
-    
-//-     link(rel='stylesheet', href='css/bootstrap.min.css')
-//-     link(rel='stylesheet', href='css/bootstrap-theme.min.css')
-//-     link(rel='stylesheet', href='startbootstrap-scrolling-nav-1.0.3/css/scrolling-nav.css')
-//-     link(rel='stylesheet', href='css/style.css')
-
-//-     //- use browserify
-//-     //- script(src='js/bundle.js')
-
-//-     script(src='js/jquery.js')
-//-     script(src='js/bootstrap.min.js')
-//-     script(src='startbootstrap-scrolling-nav-1.0.3/js/jquery.easing.min.js')
-//-     script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
-//-     script(src='http://d3js.org/d3.v3.min.js')
-//-     script(src='html5-qrcode-master/lib/jsqrcode-combined.min.js')
-//-     script(src='html5-qrcode-master/lib/html5-qrcode.min.js')
-//-     script(src='indiana.js')
-//-     script(src='js/radar.js')
-//-     script(src='js/headroom.min.js')
-
-
-//- body.container-fluid
-    //- header#explorerheader(role="navigation").row.navbar.materialshadow
-    //-     h1.pull-left #{title} Explorer
-    //-     a(href="#overviewbar").page-scroll.pull-right
-    //-         ul.list-inline
-    //-             li 
-    //-                 h2 Content
-    //-             li
-    //-                 span.glyphicon.glyphicon-list-alt
-    section#radar.page-section.row
-        //- div#radardiv
-        //- div#qrcodediv(style="width: 300px; height:200px")
-        //- div#qrcodedivdata
-        //- div#qrcodediverr
-        //- button(onclick="readqrcode()") Read QR code
-        //- button(onclick="getIndianaData()") Ask Indiana for Data
-        //- button(onclick="resetIndianaOrientation()") Reset Device Orientation
-        //- button(onclick="toggleShowSelectedItem()") Toggle only show infront
-        //- div#radartarget none
-        //- img(src="img/Radar1.jpg")
-    //- header#overviewbar(role="navigation").row.materialshadow
-    //-     h1.pull-left #{title} Page
-    //-     a(href='#explorerheader').page-scroll.pull-right 
-    //-         ul.list-inline
-    //-             li
-    //-                 h2 Radar
-    //-             li
-    //-                 span#mini_radar_icon.glyphicon.glyphicon-dashboard
-    //-                 img#mini_radar_selection
-    section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
-          
-    script.
-        //- supportsVibrate = "vibrate" in navigator;
-        //- console.log('This device supports vibration: '+ supportsVibrate);
-        //- alert(supportsVibrate);
-        $(document).ready(function(){
-            // grab an element
-            var myElement = document.querySelector("#overviewbar");
-            // construct an instance of Headroom, passing the element
-            var headroom  = new Headroom(myElement, {
-                      "offset": 462,
-                      "tolerance": 0,
-                      "classes": {
-                        "notTop" : "fixed"
-                      },
-                      onTop : function() {
-                        document.querySelector('#pagecontent').style.paddingTop = '0px';
-                        $('#mini-radar').hide();
-                      },
-                      onNotTop : function() {
-                        height = document.querySelector('#explorerheader').offsetHeight + document.querySelector('#radar').offsetHeight;
-                        myElement.style.top = height;
-                        document.querySelector('#pagecontent').style.paddingTop = '54px';
-                        $('#mini-radar').show();
-                      console.log("Show minified Radar!" + height)}
-                    });
-            // initialise
-            headroom.init(); 
-
-            //- init();
-            //- resetOrientation();
-            });
 doctype strict
 html(xmlns='http://www.w3.org/1999/xhtml')
   head
@@ -115,9 +25,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/folding.js')
     script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/tracsectionedit.js')
     //- script(src='js/bootstrap.min.js')
-    script(type='text/javascript', charset='utf-8', src='http://d3js.org/d3.v3.min.js')
-    script(type='text/javascript', charset='utf-8', src='indiana.js')
-    script(type='text/javascript', charset='utf-8', src='js/radar.js')
+    //- script(type='text/javascript', charset='utf-8', src='http://d3js.org/d3.v3.min.js')
+    //- script(type='text/javascript', charset='utf-8', src='indiana.js')
+    //- script(type='text/javascript', charset='utf-8', src='js/radar.js')
     script(type='text/javascript').
       jQuery(document).ready(function($) {
       $(".trac-autofocus").focus();
@@ -191,7 +101,16 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         hr
       #livingmap
         h2 Living Lab Map
-        object(width='400px' data='demosTECOIntranet/2dmapmockup.png' type="image/png")
+        br
+        div(style='text-align:center') You have selected  
+          span#maptarget nothing.
+        br
+        //- object(width='400px' data='demosTECOIntranet/2dmapmockup.png' type="image/png")
+        script.
+          function selectItem(id) {
+            $('#maptarget').html('the '+'<a href="#'+id+'">'+id+'</a>.')
+          }
+        object(data='demosTECOIntranet/living-lab-static.svg' type="image/svg+xml")
       #content.wiki
         .wikipage.searchable
           #wikipage.trac-content
@@ -220,33 +139,33 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   |  Die Audio LED Demo visualisiert die Umgebungslautstärke.
                   p
                     | Lampen müssen manuell eingeschaltet werden. Nach dem Einschalten ist mit einer kurzen Verzögerung zu rechnen.
-                  div#lampControls
-                    script.
-                      function turnLamp(id,url) {
-                        $.get(url, function(data, status) {
-                          console.log(status,data) // wird nicht ausgegeben...
-                          //- if(data.plugwise.state == 'on') {
-                          //-   color = 'black';
-                          //- }
-                        })
-                        var color = 'red';
-                        if(url.indexOf('on') >0) color='black'
-                        d3.select('#'+id+'radar').style('stroke',color);
-                      }
-                    p AudioLedLampe:
-                      div(data-toggle="buttons").btn-group.button-color
-                        button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/on')") ON
-                        button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off')") OFF
-                    p AudioLedLampe1: Controls are currently unavailable.
-                    p AudioLedLampe2: 
-                      div(data-toggle="buttons").btn-group.button-color
-                        button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/on')") ON
-                        button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/off')") OFF
-                    p AudioLedLampe3: Controls are currently unavailable.
-                          //- label.btn.btn-success(href='#radardiv') ON
-                          //-     input(name="color",itemue="btn btn-default",type="radio")
-                          //- label.btn.btn-warning(href='http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off') OFF
-                          //-     input(name="color",itemue="btn btn-default",type="radio")
+                  //- div#lampControls
+                  //-   script.
+                  //-     function turnLamp(id,url) {
+                  //-       $.get(url, function(data, status) {
+                  //-         console.log(status,data) // wird nicht ausgegeben...
+                  //-         //- if(data.plugwise.state == 'on') {
+                  //-         //-   color = 'black';
+                  //-         //- }
+                  //-       })
+                  //-       var color = 'red';
+                  //-       if(url.indexOf('on') >0) color='black'
+                  //-       d3.select('#'+id+'radar').style('stroke',color);
+                  //-     }
+                  //-   p AudioLedLampe:
+                  //-     div(data-toggle="buttons").btn-group.button-color
+                  //-       button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/on')") ON
+                  //-       button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off')") OFF
+                  //-   p AudioLedLampe1: Controls are currently unavailable.
+                  //-   p AudioLedLampe2: 
+                  //-     div(data-toggle="buttons").btn-group.button-color
+                  //-       button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/on')") ON
+                  //-       button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/off')") OFF
+                  //-   p AudioLedLampe3: Controls are currently unavailable.
+                  //-         //- label.btn.btn-success(href='#radardiv') ON
+                  //-         //-     input(name="color",itemue="btn btn-default",type="radio")
+                  //-         //- label.btn.btn-warning(href='http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off') OFF
+                  //-         //-     input(name="color",itemue="btn btn-default",type="radio")
               tr#MachineHealthDemo
                 td
                   a(style='padding:0; border:none', href='demosTECOIntranet/ThumbMachineHealth.jpg')

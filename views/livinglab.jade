@@ -189,15 +189,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           li.last
             a(href='/projects/admin/wiki/demos?action=history') History
         hr
-      #livingmap
-        h2 Living Lab Map
-        object(data='demosTECOIntranet/living-lab.svg' type="image/svg+xml")
-        object(width='400px' data='demosTECOIntranet/2dmapmockup.png' type="image/png")
+      //- #livingmap
+      //-   h2 Living Lab Map
+      //-   object(data='demosTECOIntranet/living-lab.svg' type="image/svg+xml")
+      //-   object(width='400px' data='demosTECOIntranet/2dmapmockup.png' type="image/png")
           
       h2(id='explorerheader') Living Lab Radar:
-      p The thing in front of you: 
-        strong#radartarget
-      #radardiv
+      p#radartarget(style="text-align: center") 
+      #radardiv 
       #content.wiki
         .wikipage.searchable
           #wikipage.trac-content
@@ -226,7 +225,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   |  Die Audio LED Demo visualisiert die Umgebungslautstärke.
                   p
                     | Lampen müssen manuell eingeschaltet werden. Nach dem Einschalten ist mit einer kurzen Verzögerung zu rechnen.
-                  div#lampControls
+                  //- div#lampControls
                     script.
                       function turnLamp(id,url) {
                         $.get(url, function(data, status) {
@@ -376,12 +375,12 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   strong
                     a.wiki(href='#EmbeddedBusinessSystems') Embedded Business Systems Demo
                     | :  Die hier vorgestellte Demo ist ein Embedded Business System für die Energieregelung. Die programmierte Business Unit versucht hierbei, basierend auf einem vom Nutzer gewählten Budget, einen optimalen Energiemix zwischen "externen" Ressourcen und eigener Stromproduktion zu wählen.
-              tr#RfidCollaborativeCommunicationDemo
+              tr#RfidCommunicationDemo
                 td
                   a(style='padding:0; border:none', href='demosTECOIntranet/ThumbRfidCollab.jpg')
                     img(width='316px', src='demosTECOIntranet/ThumbRfidCollab.jpg')
                 td
-                  a.wiki(href='#RfidCollaborativeCommunicationDemo') RFID Collaborative Communication Demo
+                  a.wiki(href='#RfidCommunicationDemo') RFID Collaborative Communication Demo
                   | : Temperaturänderungen bei verderblichen Waren
                   strong
                     | Mock-Up eines Systems zur Visualisierung von Temperaturänderungen verderblicher Waren in einem Lagerhaus.

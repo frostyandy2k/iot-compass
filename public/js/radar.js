@@ -25,9 +25,9 @@ function generateCircle(svgparent, radius) {
 }
 function initRadar(divSelector, items) {
   $(divSelector).html('');
-  $(divSelector).append("<ul id='itemslist' aria-hidden=false aria-label='Help Info'/>");
-  var ul = $(divSelector).find('ul');
-  ul.hide();
+  // $(divSelector).append("<ul id='itemslist' aria-hidden=false aria-label='Help Info'/>");
+  // var ul = $(divSelector).find('ul');
+  // ul.hide();
 
   var spacetime = d3.select(divSelector);
 
@@ -84,8 +84,7 @@ function initRadar(divSelector, items) {
     .attr("fill","none");
 
   $.each(items, function(key, val){
-    // $(divSelector).find('list')[0].append
-    ul.append('<li>'+key+' blub blub</li>')
+    // ul.append('<li>'+key+' blub blub</li>')
     if(val.img) {
       generatePattern(svg, itemradius*2, val.img, key+'pattern');
       generatePattern(svg, 100, val.img, key+'patternFull');
@@ -190,7 +189,7 @@ function initListeners() {
   var valURIold;
   var vibrating = false;
   document.addEventListener('noItemInFront', function() {
-    $('#radartarget').html("none");
+    $('#radartarget').html("No registered things in front of you");
     // $('#selectionCircle').attr("fill","none");
     vibrating = false;
 
@@ -204,7 +203,10 @@ function initListeners() {
   })
   document.addEventListener('foundItemInFront', function(item) {
     item = item.detail;
-    $('#radartarget').html(item.key);
+    if(item.key != 'none')
+    $('#radartarget').html('You are looking at the <a href="#'+item.key+'">'+ item.key + '</a>');
+    // else
+    // $('#radartarget').html('No registered things in front of you');
 
     $('#mini_radar_icon').hide();
     $('#mini_radar_selection').show();

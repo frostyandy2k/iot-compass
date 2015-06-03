@@ -25,67 +25,70 @@ router.get('/livinglab', function(req, res) {
 router.get('/livinglab2DM', function(req, res) {
   res.render('livinglab2DM');
 });
+// router.get('/livinglab.html', function(req, res) {
+//   res.render('livinglab2DM');
+// });
 
 router.get('/livinglab/items', function(req, res) {
 	var livinglab_items = {
 	  "EmbeddedBusinessSystems": {
-	    location: {dir: 40},
+	    location: {dir: 50},
 	    img: "demosTECOIntranet/EBS_front_radar.png"
 	  },
 	  "VDAR": {
-	    location: {dir: 50},
+	    location: {dir: 60},
 	    img: "demosTECOIntranet/VDAR_Logo_radar.png"
 	  },
 	  "AudioLedLampe": {
-	    location: {dir: 30},
-	    status: false,
+	    location: {dir: 40},
+	    status: true,
 	    controlON: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/on",
 	    controlOFF: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/off",
 	    img: "demosTECOIntranet/ThumbAudioLed_radar.png"
 	  },
 	  "LedPowerDemo": {
-	    location: {dir: 95},
+	    location: {dir: 110},
 	    img: "demosTECOIntranet/ThumbLedPower_radar.png",
 	  },
 	  "AudioLedLampe1": {
-	    location: {dir: 115},
+	    location: {dir: 160},
 	    status: true,
 	    img: "demosTECOIntranet/ThumbAudioLed_radar.png"
 	  },
 	  "PointAndClick": {
-	    location: {dir: 155},
+	    location: {dir: 180},
 	    img: "demosTECOIntranet/ThumbPointAndClick_radar.png",
 	  },
 	  "HealthCareDemo": {
-	    location: {dir: 165},
+	    location: {dir: 190},
 	    img: "demosTECOIntranet/ThumbKneeGuard_radar.png",
 	  },
 	  "TecoEnvboard": {
-	    location: {dir: 180},
+	    location: {dir: 200},
 	    img: "demosTECOIntranet/envboard-demo-neu_radar.png",
 	  },
-	  "RfidCollaborativeCommunicationDemo": {
-	    location: {dir: 220},
+	  "RfidCommunicationDemo": {
+	    location: {dir: 260},
 	    img: "demosTECOIntranet/ThumbRfidCollab_radar.png",
 	  },
 	  "AudioLedLampe2": {
-	    location: {dir: 230},
-	    status: false,
+	    location: {dir: 270},
+	    status: true,
 	    controlON: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/on",
 	    controlOFF: "http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off",
 	    img: "demosTECOIntranet/ThumbAudioLed_radar.png"
 	  },
 	  "MachineHealthDemo": {
-	    location: {dir: 245},
+	    location: {dir: 280},
 	    img: "demosTECOIntranet/ThumbMachineHealth_radar.png",
 	  },
 	  "AudioLedLampe3": {
-	    location: {dir: 290},
+	    location: {dir: 320},
 	    status: true,
 	    img: "demosTECOIntranet/ThumbAudioLed_radar.png"
 	  },
 	  "LandmarkeDemo": {
-	    location: {dir: 300},
+	    location: {dir: 330},
 	    img: "demosTECOIntranet/Landmarke Demo_radar.png",
 	  },
 	};
