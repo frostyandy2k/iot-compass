@@ -1,0 +1,630 @@
+//- doctype html
+//- html
+//-   head
+//-     title= title
+//-     meta(charset="utf-8")
+//-     meta(name="viewport" content="width=device-width, initial-scale=1.0")
+//-     //- link(rel='stylesheet', href='css/bootstrap-responsive.css') //probably already compiled into boostrap.min
+    
+//-     link(rel='stylesheet', href='css/bootstrap.min.css')
+//-     link(rel='stylesheet', href='css/bootstrap-theme.min.css')
+//-     link(rel='stylesheet', href='startbootstrap-scrolling-nav-1.0.3/css/scrolling-nav.css')
+//-     link(rel='stylesheet', href='css/style.css')
+
+//-     //- use browserify
+//-     //- script(src='js/bundle.js')
+
+//-     script(src='js/jquery.js')
+//-     script(src='js/bootstrap.min.js')
+//-     script(src='startbootstrap-scrolling-nav-1.0.3/js/jquery.easing.min.js')
+//-     script(src='startbootstrap-scrolling-nav-1.0.3/js/scrolling-nav.js')
+//-     script(src='http://d3js.org/d3.v3.min.js')
+//-     script(src='html5-qrcode-master/lib/jsqrcode-combined.min.js')
+//-     script(src='html5-qrcode-master/lib/html5-qrcode.min.js')
+//-     script(src='indiana.js')
+//-     script(src='js/radar.js')
+//-     script(src='js/headroom.min.js')
+
+
+//- body.container-fluid
+    //- header#explorerheader(role="navigation").row.navbar.materialshadow
+    //-     h1.pull-left #{title} Explorer
+    //-     a(href="#overviewbar").page-scroll.pull-right
+    //-         ul.list-inline
+    //-             li 
+    //-                 h2 Content
+    //-             li
+    //-                 span.glyphicon.glyphicon-list-alt
+    section#radar.page-section.row
+        //- div#radardiv
+        //- div#qrcodediv(style="width: 300px; height:200px")
+        //- div#qrcodedivdata
+        //- div#qrcodediverr
+        //- button(onclick="readqrcode()") Read QR code
+        //- button(onclick="getIndianaData()") Ask Indiana for Data
+        //- button(onclick="resetIndianaOrientation()") Reset Device Orientation
+        //- button(onclick="toggleShowSelectedItem()") Toggle only show infront
+        //- div#radartarget none
+        //- img(src="img/Radar1.jpg")
+    //- header#overviewbar(role="navigation").row.materialshadow
+    //-     h1.pull-left #{title} Page
+    //-     a(href='#explorerheader').page-scroll.pull-right 
+    //-         ul.list-inline
+    //-             li
+    //-                 h2 Radar
+    //-             li
+    //-                 span#mini_radar_icon.glyphicon.glyphicon-dashboard
+    //-                 img#mini_radar_selection
+    section#pagecontent(vocab='http://schema.org/', role='main').page-section.home
+          
+    script.
+        //- supportsVibrate = "vibrate" in navigator;
+        //- console.log('This device supports vibration: '+ supportsVibrate);
+        //- alert(supportsVibrate);
+        $(document).ready(function(){
+            // grab an element
+            var myElement = document.querySelector("#overviewbar");
+            // construct an instance of Headroom, passing the element
+            var headroom  = new Headroom(myElement, {
+                      "offset": 462,
+                      "tolerance": 0,
+                      "classes": {
+                        "notTop" : "fixed"
+                      },
+                      onTop : function() {
+                        document.querySelector('#pagecontent').style.paddingTop = '0px';
+                        $('#mini-radar').hide();
+                      },
+                      onNotTop : function() {
+                        height = document.querySelector('#explorerheader').offsetHeight + document.querySelector('#radar').offsetHeight;
+                        myElement.style.top = height;
+                        document.querySelector('#pagecontent').style.paddingTop = '54px';
+                        $('#mini-radar').show();
+                      console.log("Show minified Radar!" + height)}
+                    });
+            // initialise
+            headroom.init(); 
+
+            //- init();
+            //- resetOrientation();
+            });
+doctype strict
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    title
+      | demos – TecO Intranet
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    //- meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+    link(rel='search', href='/projects/admin/search')
+    link(rel='help', href='/projects/admin/wiki/TracGuide')
+    link(rel='alternate', href='/projects/admin/wiki/demos?format=txt', type='text/x-trac-wiki', title='Plain Text')
+    link(rel='start', href='/projects/admin/wiki')
+    link(rel='stylesheet', href='demosTECOIntranet/trac.css', type='text/css')
+    link(rel='stylesheet', href='demosTECOIntranet/wiki.css', type='text/css')
+    link(rel='shortcut icon', href='demosTECOIntranet/trac.ico', type='image/x-icon')
+    link(rel='icon', href='demosTECOIntranet/trac.ico', type='image/x-icon')
+    link(type='application/opensearchdescription+xml', rel='search', href='/projects/admin/search/opensearch', title='Search TecO Intranet')
+    //- link(rel='stylesheet', href='css/bootstrap.min.css')
+    //- link(rel='stylesheet', href='css/bootstrap-theme.min.css')
+    script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/jquery.js')
+    script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/babel.js')
+    script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/trac.js')
+    script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/search.js')
+    script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/folding.js')
+    script(type='text/javascript', charset='utf-8', src='demosTECOIntranet/tracsectionedit.js')
+    //- script(src='js/bootstrap.min.js')
+    script(type='text/javascript', charset='utf-8', src='http://d3js.org/d3.v3.min.js')
+    script(type='text/javascript', charset='utf-8', src='indiana.js')
+    script(type='text/javascript', charset='utf-8', src='js/radar.js')
+    script(type='text/javascript').
+      jQuery(document).ready(function($) {
+      $(".trac-autofocus").focus();
+      $(".trac-target-new").attr("target", "_blank");
+      setTimeout(function() {
+      $(".trac-scroll").scrollToTop()
+      }, 1);
+      $(".trac-disable-on-submit").disableOnSubmit();
+      });
+    link(rel='alternate', type='application/x-wiki', href='/projects/admin/wiki/demos?action=edit', title='Edit this page')
+    script(type='text/javascript').
+      jQuery(document).ready(function($) {
+      $("#content").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+      $("#content").find(".wikianchor").each(function() {
+      $(this).addAnchor(babel.format(_("Link to #%(id)s"), {
+      id: $(this).attr('id')
+      }));
+      });
+      $(".foldable").enableFolding(true, true);
+      });
+  body
+    #banner
+      #header
+        a#logo(href='http://www.teco.edu/')
+          img(src='demosTECOIntranet/logolila.gif', alt='teco')
+      form#search(action='/projects/admin/search', method='get')
+        div
+          label(for='proj-search') Search:
+          input#proj-search(type='text', name='q', size='18', value='')
+          input(type='submit', value='Search')
+      #metanav.nav
+        ul
+          li.first logged in as unseld
+          li
+            form#logout.trac-logout(action='/projects/admin/logout', method='post')
+              div
+                input(type='hidden', name='__FORM_TOKEN', value='42ce0cdac6f01d079f3b397c')
+              div
+                button(type='submit', name='logout') Logout
+          li
+            a(href='/projects/admin/wiki/TracGuide') Help/Guide
+          li
+            a(href='/projects/admin/about') About Trac
+          li.last
+            a(href='/projects/admin/prefs') Preferences
+    #mainnav.nav
+      ul
+        li.first.active
+          a(href='/projects/admin/wiki') Wiki
+        li
+          a(href='/projects/admin/timeline') Timeline
+        li
+          a(href='/projects/admin/report') View Tickets
+        li
+          a(href='/projects/admin/newticket') New Ticket
+        li.last
+          a(href='/projects/admin/search') Search
+    #main
+      #pagepath.noprint
+        a.pathentry.first(title='View WikiStart', href='/projects/admin/wiki') wiki:
+        a.pathentry(href='/projects/admin/wiki/demos', title='View demos') demos
+      #ctxtnav.nav
+        h2 Context Navigation
+        ul
+          li.first
+            a(href='/projects/admin/wiki/WikiStart') Start Page
+          li
+            a(href='/projects/admin/wiki/TitleIndex') Index
+          li.last
+            a(href='/projects/admin/wiki/demos?action=history') History
+        hr
+      #livingmap
+        h2 Living Lab Map
+        object(width='400px' data='demosTECOIntranet/2dmapmockup.png' type="image/png")
+      #content.wiki
+        .wikipage.searchable
+          #wikipage.trac-content
+            h2(id='pagecontent') Living Lab Demos:
+            table.wiki
+              tr#LedPowerDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/ThumbLedPower.jpg')
+                    img(width='316px', src='demosTECOIntranet/ThumbLedPower.jpg')
+                td(style='text-align: left')
+                  strong
+                    a.wiki(href='#LedPowerDemo') LED Power Demo
+                    | : Visualisierung von Heizung und Stromverbrauch
+                  |  Die LED-Demo ist eine Art Demonstrator von Ambient Lighting. Die digitalen LEDs sind in der Umgebung von Heizungen und elektronischen Geräten installiert. Die LED-Beleuchtung mit unterschiedlichen Farben wird als Indikator für den Temperaturstatus einer Heizung oder den Stromverbrauchsstatus eines elektronischen Geräts eingesetzt. Mit diesem Ansatz kann ein Nutzer, der sich in dieser Umgebung befindet, sein Bewusstsein für einen Energieverbrauch schärfen.
+              tr#AudioLedLampe
+                td
+                  span#AudioLedLampe1
+                  span#AudioLedLampe2
+                  span#AudioLedLampe3
+                  a(style='padding:0; border:none', href='demosTECOIntranet/ThumbAudioLed.jpg')
+                    img(width='316px', src='demosTECOIntranet/ThumbAudioLed.jpg')
+                td(style='text-align: left')
+                  strong 
+                    a.wiki(href='#AudioLedLampe') Audio LED-Strip
+                    | : Visualisierung der Umgebungslautstärke
+                  |  Die Audio LED Demo visualisiert die Umgebungslautstärke.
+                  p
+                    | Lampen müssen manuell eingeschaltet werden. Nach dem Einschalten ist mit einer kurzen Verzögerung zu rechnen.
+                  div#lampControls
+                    script.
+                      function turnLamp(id,url) {
+                        $.get(url, function(data, status) {
+                          console.log(status,data) // wird nicht ausgegeben...
+                          //- if(data.plugwise.state == 'on') {
+                          //-   color = 'black';
+                          //- }
+                        })
+                        var color = 'red';
+                        if(url.indexOf('on') >0) color='black'
+                        d3.select('#'+id+'radar').style('stroke',color);
+                      }
+                    p AudioLedLampe:
+                      div(data-toggle="buttons").btn-group.button-color
+                        button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/on')") ON
+                        button(onclick="turnLamp('AudioLedLampe','http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off')") OFF
+                    p AudioLedLampe1: Controls are currently unavailable.
+                    p AudioLedLampe2: 
+                      div(data-toggle="buttons").btn-group.button-color
+                        button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/on')") ON
+                        button(onclick="turnLamp('AudioLedLampe2','http://tecodemopc.teco.edu:5000/plugwise/000D6F0000C3A9FC/off')") OFF
+                    p AudioLedLampe3: Controls are currently unavailable.
+                          //- label.btn.btn-success(href='#radardiv') ON
+                          //-     input(name="color",itemue="btn btn-default",type="radio")
+                          //- label.btn.btn-warning(href='http://tecodemopc.teco.edu:5000/plugwise/000D6F0002768C43/off') OFF
+                          //-     input(name="color",itemue="btn btn-default",type="radio")
+              tr#MachineHealthDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/ThumbMachineHealth.jpg')
+                    img(width='316px', src='demosTECOIntranet/ThumbMachineHealth.jpg')
+                td
+                  strong
+                    a.wiki(href='#MachineHealthDemo') Machine Health Demo
+                    | : Predictive Maintenance
+                  |  Die Demo veranschaulicht die Mean Time To Failure eines Lüfters.
+              tr#PointAndClick
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/ThumbPointAndClick.jpg')
+                    img(width='316px', src='demosTECOIntranet/ThumbPointAndClick.jpg')
+                td
+                  strong
+                    a.wiki(href='#PointAndClick') Point And Click
+                    | : Interaktive Gerätesteuerung
+                  |  Mit Hilfe der Microsoft Kinect sowie einer passenden App ist es möglich verschiedene Geräte im Living Lab mit Hilfe eines Smartphones zu steuern.
+              tr#bPartDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/bParts.jpg')
+                    img(width='316px', src='demosTECOIntranet/bParts.jpg')
+                td(style='text-align: left')
+                  strong
+                    a.wiki(href='#bPartDemo') bPart
+                    | :
+                  |  Bluetooth LE Particle mit verschiedenen Sensoren, die mit der passenden App ausgelesen werden können
+              tr#VDAR
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/VDAR_Logo.jpg')
+                    img(src='demosTECOIntranet/VDAR_Logo.jpg')
+                td
+                  strong
+                    strong.wiki(href='#VDAR') VDAR
+                    | : Dezentrale Energiemärkte
+                  |  Die VDAR Demo zeigt eine Simulationsumgebung des dezentralen Strommarkts. Durch unterschiedliche Szenarien demonstriert das VDAR System ein dynamisches Gleichgewicht zwischen verteiltem Stromnetz und dezentralem Strommarkt. Vom VDAR System sind schließlich fairere Preise für den Endverbraucher und stabile sowie vorhersagbare Betriebskosten für den Versorger zu erwarten.
+              tr#HealthCareDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/ThumbKneeGuard.jpg')
+                    img(src='demosTECOIntranet/ThumbKneeGuard.jpg')
+                td(style='text-align: left')
+                  strong
+                    a.wiki(href='#HealthCareDemo') Knee Guard Demo
+                    | : Visualisierung von Druckbelastungen im Knie
+                  |  Es handelt sich um eine Demo zu Visualisierung von Druckbelastungen im Knie auf Basis von lokalen Temperaturänderungen auf der Haut.
+              tr#SmartTeco
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/smartteco.jpg')
+                    img(src='demosTECOIntranet/smartteco.jpg')
+                td
+                  strong
+                    a.wiki(href='#SmartTeco') Smart Teco
+                    |  - Web-basiertes Ressource-Management in einer Büroumgebung.
+                  |  ist eine Web-Plattform zur Verwaltung verschiedener Sensoren und Aktuatoren ausgestattet in TECO. In den TECO-Räumen sind mehrere uParts Sensorknoten installiert, um die Bewegung um oder von Objekten zu ermitteln, die Temperaturen und Beleuchtungszustände zu überwachen. Jede Steckdose ist ausgerüstet mit einer Plugwise Circle für eine echtzeitfähige Energieverbrauchsmessung. Jede Heizung ist steuerbar über einen FHT-Sensor/-Aktuator, der sich als ein drahtloser Temperaturregler bewährt.
+              tr#HandyDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/Handy%20Demo.jpg')
+                    img(src='demosTECOIntranet/Handy%20Demo.jpg')
+                td
+                  strong
+                    a.wiki(href='#HandyDemo') Handy Demo
+                    | : Aktivitätserkennung mit Mobiltelefonen.
+                  |  Der Benutzer sammelt Daten für eine zu erkennende Aktivität und ein maschinelles Lernen identifiziert den Erkenner. Das Training von neuen Erkennern wird von einem Service durchgeführt. Der Benutzer lädt einfach die App herunter, sammelt Daten einiger Aktivitäten und der Service übernimmt diese. Am Ende wird die Benutzeraktivität (z.B. Benutzer läuft, sitzt oder fährt Fahrrad) mittels Sensoren des Mobiltelefons erkannt und auf dem Mobiltelefon sowie dem Rechner angezeigt.
+              tr#TecoEnvboard
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/envboard-demo-neu.jpg')
+                    img(width='316px', src='demosTECOIntranet/envboard-demo-neu.jpg')
+                td
+                  strong
+                    strong.wiki(href='#TecoEnvboard') Teco Envboard
+                    |  - Mobile Sensorplattform zur präzisen Erfassung von (urbanen) Umweltdaten
+                  |  Das ansteigende Interesse der Gesellschaft an der Erfassung städtischer Umweltdaten nimmt immer mehr zu. Neben den Auswirkungen der Umweltverschmutzung auf die menschliche Gesundheit, spielt auch das Wachstum und die Veränderung der Umwelt eine Rolle. Man ist daran interessiert den Veränderungen mit neu definierten Beschränkungen zur Schadstoffreduktion entgegen zu kommen.
+              tr#PolytosDemo
+                td
+                td
+                  strong
+                    a.wiki(href='#PolytosDemo') Polytos Demo
+                    | :
+                  |  Wall of Text
+              tr#LandmarkeDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/Landmarke%20Demo.jpg')
+                    img(src='demosTECOIntranet/Landmarke%20Demo.jpg')
+                td
+                  strong
+                    a.wiki(href='#LandmarkeDemo') Landmarke Demo
+                    | : Aufbau eines Netzes von Referenzpunkten mit interaktiven Landmarken.
+                  |  Feuerwehrleute müssen in kurzer Zeit eine verlässliche Abschätzung der Einsatzlage abgeben können. Ziel des Landmarke Projekts ist es eine Orientierungs- und Navigationsinfrastruktur zu entwickeln. Diese ermöglicht es unter schlechten Sichtbedingungen den Feuerwehrleuten ein dynamisch wachsendes Ad-hoc Referenzsystem aufzubauen. Die Demo zeigt das Grundprinzip, wie man mit der Hilfe von Software visuelle oder auditive Signale einer bestimmten Landmarke aufrufen und sich dadurch in der Umgebung orientieren kann.
+              tr#DinamMite
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/dinam-mite.jpg')
+                    img(src='demosTECOIntranet/dinam-mite.jpg')
+                td
+                  strong
+                    a.wiki(href='#DinamMite') Dinam Mite
+                    | :
+                  |  Diese Demonstration zeigt eine in sich geschlossene drahtlose Sensornetzwerk-Entwicklungsumgebung. Die gesamten Tools, wie IDE, Bibliotheken, Code, Daten, Logs, die für Visualisierung und Entwicklung erforderlich sind, befinden sich auf jeden Sensorknoten und sind mit der Hilfe des Web-Interfaces zu erreichen.
+              tr#AugmentedRealitySensors
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/ARSensor.png')
+                    img(src='demosTECOIntranet/ARSensor.png')
+                td
+                  strong
+                    a.wiki(href='#AugmentedRealitySensors') Augmented Reality Sensors
+                    | : Tablet-PC, JAVA-basierte Anwendungs-Software und eine USB-Kamera.
+                  |  Diese Demo zeigt, wie eine Kombination aus Leichtbau-Service-Architektur und Augmented Reality (AR) Schnittstellen helfen kann, Daten aus autonomen eingebetteten Systemen vor Ort sammelt, um diese zu analysieren. Die Demo läuft auf einem Tablet-PC mit Windows XP Tablet Edition und einer JAVA-basierten Anwendungs-Software. Um Augmented Reality zu ermöglichen, wird eine USB-Kamera auf die Seite des Displays montiert. Daneben wird das Gateway-Gerät über USB angeschlossen, um den Sensor-Netzwerk Zugriff zu ermöglichen.
+              tr#HausDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/3D%20Haus.jpg')
+                    img(src='demosTECOIntranet/3D%20Haus.jpg')
+                td(style='text-align: left')
+                  strong
+                    a.wiki(href='#HausDemo') Haus Demo
+                    | : SensorRAUM oder intuitive Benutzeroberflächen für drahtlose Sensornetzwerke. Demo wurde archiviert und wird nicht mehr weitergeführt !
+                  |  Die gesamte Mission der SensorRAUM Projektes ist benutzerfreundliche und intuitive Benutzeroberflächen für drahtlose Sensornetzwerke zu untersuchen, zu definieren, zu entwickeln und zu demonstrieren. Das Demo besteht aus 2 Modelen von einem Haus: einem virtuellen 3D Modell als ein Simulation auf dem Rechner und einem realen Model aus Holz, wo in jedem Zimmer die Licht- und Temperatursensoren eingebaut wurden. Dabei sind in 3D Model aktuelle "reale" Temperatur und Lichtstärke zu sehen.
+              tr#EmbeddedBusinessSystems
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/EBS_front.JPG')
+                    img(width='316px', src='demosTECOIntranet/EBS_front.JPG')
+                td(style='text-align: left')
+                  strong
+                    a.wiki(href='#EmbeddedBusinessSystems') Embedded Business Systems Demo
+                    | :  Die hier vorgestellte Demo ist ein Embedded Business System für die Energieregelung. Die programmierte Business Unit versucht hierbei, basierend auf einem vom Nutzer gewählten Budget, einen optimalen Energiemix zwischen "externen" Ressourcen und eigener Stromproduktion zu wählen.
+              tr#RfidCollaborativeCommunicationDemo
+                td
+                  a(style='padding:0; border:none', href='demosTECOIntranet/ThumbRfidCollab.jpg')
+                    img(width='316px', src='demosTECOIntranet/ThumbRfidCollab.jpg')
+                td
+                  a.wiki(href='#RfidCollaborativeCommunicationDemo') RFID Collaborative Communication Demo
+                  | : Temperaturänderungen bei verderblichen Waren
+                  strong
+                    | Mock-Up eines Systems zur Visualisierung von Temperaturänderungen verderblicher Waren in einem Lagerhaus.
+            h2(id='Slideshow:') Slideshow:
+            p
+              | Die kontinuierliche Anzeige von Bildern wurde mit der kostenpflichtigen Software gPhotoShow auf dem Shuttle-PC realisiert. Lizenzschlüssel (Key) für gPhotoShow:
+              tt 000015-21J4YC-8NRYY9-ZY4YB2-PAGW01-38A7UA-F0FTBX-PUE9EB-DH41K5-G600CB
+          .trac-modifiedby
+            span
+              a(href='/projects/admin/wiki/demos?action=diff&version=250', title='Version 250 by rdissi') Last modified
+              a.timeline(href='/projects/admin/timeline?from=2015-05-28T09%3A43%3A45%2B02%3A00&precision=second', title='See timeline at May 28, 2015 9:43:45 AM') 4 days ago
+            span.trac-print Last modified on May 28, 2015 9:43:45 AM
+        #attachments
+          h3.foldable
+            | Attachments 
+            span.trac-count (23)
+          div
+            ul
+              li
+                a(href='demosTECOIntranet/Handy%20Demo.jpg', title='View attachment') Handy Demo.jpg
+                a.trac-rawlink(href='demosTECOIntranet/Handy%20Demo.jpg', title='Download') ​
+                |  (
+                span(title='34376 bytes') 33.6 KB
+                | ) - added by 
+                em sackmann
+                a.timeline(href='/projects/admin/timeline?from=2012-02-29T15%3A30%3A09%2B01%3A00&precision=second', title='See timeline at Feb 29, 2012 3:30:09 PM') 3 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/3D%20Haus.jpg', title='View attachment') 3D Haus.jpg
+                a.trac-rawlink(href='demosTECOIntranet/3D%20Haus.jpg', title='Download') ​
+                |  (
+                span(title='28678 bytes') 28.0 KB
+                | ) - added by 
+                em sackmann
+                a.timeline(href='/projects/admin/timeline?from=2012-02-29T17%3A09%3A15%2B01%3A00&precision=second', title='See timeline at Feb 29, 2012 5:09:15 PM') 3 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/Landmarke%20Demo.jpg', title='View attachment') Landmarke Demo.jpg
+                a.trac-rawlink(href='demosTECOIntranet/Landmarke%20Demo.jpg', title='Download') ​
+                |  (
+                span(title='35138 bytes') 34.3 KB
+                | ) - added by 
+                em sackmann
+                a.timeline(href='/projects/admin/timeline?from=2012-03-06T16%3A51%3A41%2B01%3A00&precision=second', title='See timeline at Mar 6, 2012 4:51:41 PM') 3 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/envboard.jpg', title='View attachment') envboard.jpg
+                a.trac-rawlink(href='demosTECOIntranet/envboard.jpg', title='Download') ​
+                |  (
+                span(title='33611 bytes') 32.8 KB
+                | ) - added by 
+                em sackmann
+                a.timeline(href='/projects/admin/timeline?from=2012-04-13T15%3A14%3A45%2B02%3A00&precision=second', title='See timeline at Apr 13, 2012 3:14:45 PM') 3 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/ARSensor.png', title='View attachment') ARSensor.png
+                a.trac-rawlink(href='demosTECOIntranet/ARSensor.png', title='Download') ​
+                |  (
+                span(title='204089 bytes') 199.3 KB
+                | ) - added by 
+                em sackmann
+                a.timeline(href='/projects/admin/timeline?from=2012-05-29T16%3A03%3A23%2B02%3A00&precision=second', title='See timeline at May 29, 2012 4:03:23 PM') 3 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/dinam-mite.jpg', title='View attachment') dinam-mite.jpg
+                a.trac-rawlink(href='demosTECOIntranet/dinam-mite.jpg', title='Download') ​
+                |  (
+                span(title='31142 bytes') 30.4 KB
+                | ) - added by 
+                em sackmann
+                a.timeline(href='/projects/admin/timeline?from=2012-06-20T15%3A49%3A34%2B02%3A00&precision=second', title='See timeline at Jun 20, 2012 3:49:34 PM') 3 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/devices_new.jpg', title='View attachment') devices_new.jpg
+                a.trac-rawlink(href='demosTECOIntranet/devices_new.jpg', title='Download') ​
+                |  (
+                span(title='86371 bytes') 84.3 KB
+                | ) - added by 
+                em ding
+                a.timeline(href='/projects/admin/timeline?from=2013-02-20T10%3A54%3A39%2B01%3A00&precision=second', title='See timeline at Feb 20, 2013 10:54:39 AM') 2 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/smartteco.jpg', title='View attachment') smartteco.jpg
+                a.trac-rawlink(href='demosTECOIntranet/smartteco.jpg', title='Download') ​
+                |  (
+                span(title='27735 bytes') 27.1 KB
+                | ) - added by 
+                em ding
+                a.timeline(href='/projects/admin/timeline?from=2013-02-20T14%3A47%3A11%2B01%3A00&precision=second', title='See timeline at Feb 20, 2013 2:47:11 PM') 2 years ago
+                | .
+              li
+                a(href='demosTECOIntranet/AudioLed.jpg', title='View attachment') AudioLed.jpg
+                a.trac-rawlink(href='demosTECOIntranet/AudioLed.jpg', title='Download') ​
+                |  (
+                span(title='1568389 bytes') 1.5 MB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A05%3A56%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:05:56 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/KneeGuard.jpg', title='View attachment') KneeGuard.jpg
+                a.trac-rawlink(href='demosTECOIntranet/KneeGuard.jpg', title='Download') ​
+                |  (
+                span(title='1418325 bytes') 1.4 MB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A06%3A10%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:06:10 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/LedPowder.jpg', title='View attachment') LedPowder.jpg
+                a.trac-rawlink(href='demosTECOIntranet/LedPowder.jpg', title='Download') ​
+                |  (
+                span(title='1581751 bytes') 1.5 MB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A06%3A17%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:06:17 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/MachineHealth.jpg', title='View attachment') MachineHealth.jpg
+                a.trac-rawlink(href='demosTECOIntranet/MachineHealth.jpg', title='Download') ​
+                |  (
+                span(title='1470956 bytes') 1.4 MB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A06%3A28%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:06:28 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/PointAndClick.jpg', title='View attachment') PointAndClick.jpg
+                a.trac-rawlink(href='demosTECOIntranet/PointAndClick.jpg', title='Download') ​
+                |  (
+                span(title='1201314 bytes') 1.1 MB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A06%3A39%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:06:39 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/RfidCollab.jpg', title='View attachment') RfidCollab.jpg
+                a.trac-rawlink(href='demosTECOIntranet/RfidCollab.jpg', title='Download') ​
+                |  (
+                span(title='1368704 bytes') 1.3 MB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A12%3A18%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:12:18 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/ThumbAudioLed.jpg', title='View attachment') ThumbAudioLed.jpg
+                a.trac-rawlink(href='demosTECOIntranet/ThumbAudioLed.jpg', title='Download') ​
+                |  (
+                span(title='9842 bytes') 9.6 KB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A42%3A18%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:42:18 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/ThumbKneeGuard.jpg', title='View attachment') ThumbKneeGuard.jpg
+                a.trac-rawlink(href='demosTECOIntranet/ThumbKneeGuard.jpg', title='Download') ​
+                |  (
+                span(title='11136 bytes') 10.9 KB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A42%3A22%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:42:22 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/ThumbLedPower.jpg', title='View attachment') ThumbLedPower.jpg
+                a.trac-rawlink(href='demosTECOIntranet/ThumbLedPower.jpg', title='Download') ​
+                |  (
+                span(title='9171 bytes') 9.0 KB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A42%3A27%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:42:27 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/ThumbMachineHealth.jpg', title='View attachment') ThumbMachineHealth.jpg
+                a.trac-rawlink(href='demosTECOIntranet/ThumbMachineHealth.jpg', title='Download') ​
+                |  (
+                span(title='18088 bytes') 17.7 KB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A42%3A31%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:42:31 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/ThumbPointAndClick.jpg', title='View attachment') ThumbPointAndClick.jpg
+                a.trac-rawlink(href='demosTECOIntranet/ThumbPointAndClick.jpg', title='Download') ​
+                |  (
+                span(title='6263 bytes') 6.1 KB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A42%3A37%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:42:37 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/ThumbRfidCollab.jpg', title='View attachment') ThumbRfidCollab.jpg
+                a.trac-rawlink(href='demosTECOIntranet/ThumbRfidCollab.jpg', title='Download') ​
+                |  (
+                span(title='13819 bytes') 13.5 KB
+                | ) - added by 
+                em richardson
+                a.timeline(href='/projects/admin/timeline?from=2014-03-21T09%3A42%3A41%2B01%3A00&precision=second', title='See timeline at Mar 21, 2014 9:42:41 AM') 15 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/VDAR_Logo.jpg', title='View attachment') VDAR_Logo.jpg
+                a.trac-rawlink(href='demosTECOIntranet/VDAR_Logo.jpg', title='Download') ​
+                |  (
+                span(title='17873 bytes') 17.5 KB
+                | ) - added by 
+                em ding
+                a.timeline(href='/projects/admin/timeline?from=2014-04-28T04%3A53%3A37%2B02%3A00&precision=second', title='See timeline at Apr 28, 2014 4:53:37 AM') 13 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/bParts.jpg', title='View attachment') bParts.jpg
+                a.trac-rawlink(href='demosTECOIntranet/bParts.jpg', title='Download') ​
+                |  (
+                span(title='1067790 bytes') 1.0 MB
+                | ) - added by 
+                em leiner
+                a.timeline(href='/projects/admin/timeline?from=2015-03-30T11%3A05%3A48%2B02%3A00&precision=second', title='See timeline at Mar 30, 2015 11:05:48 AM') 2 months ago
+                | .
+              li
+                a(href='demosTECOIntranet/envboard-demo-neu.jpg', title='View attachment') envboard-demo-neu.jpg
+                a.trac-rawlink(href='demosTECOIntranet/envboard-demo-neu.jpg', title='Download') ​
+                |  (
+                span(title='1230757 bytes') 1.2 MB
+                | ) - added by 
+                em leiner
+                a.timeline(href='/projects/admin/timeline?from=2015-04-21T11%3A59%3A55%2B02%3A00&precision=second', title='See timeline at Apr 21, 2015 11:59:55 AM') 6 weeks ago
+                | .
+        .buttons
+          form#modifypage(method='get', action='/projects/admin/wiki/demos')
+            div
+              input(type='hidden', name='action', value='edit')
+              input(type='submit', value='Edit this page')
+          form#attachfile(method='get', action='demosTECOIntranet/')
+            div
+              input(type='hidden', name='action', value='new')
+              input#attachfilebutton(type='submit', value='Attach another file')
+      #altlinks
+        h3 Download in other formats:
+        ul
+          li.last.first
+            a(rel='nofollow', href='/projects/admin/wiki/demos?format=txt') Plain Text
+    #footer(lang='en', xml:lang='en')
+      hr
+      a#tracpowered(href='http://trac.edgewall.org/')
+        img(src='demosTECOIntranet/trac_logo_mini.png', height='30', width='107', alt='Trac Powered')
+      p.left
+        | Powered by 
+        a(href='/projects/admin/about')
+          strong Trac 1.0.2
+        br
+        |  By 
+        a(href='http://www.edgewall.org/') Edgewall Software
+        | .
+      p.right Welcome to TecO
