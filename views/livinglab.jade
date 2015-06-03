@@ -142,7 +142,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     #banner
       #header
         a#logo(href='http://www.teco.edu/')
-          img(src='https://www.teco.edu/wp-content/themes/teco/images/logolila.gif', alt='teco')
+          img(src='demosTECOIntranet/logolila.gif', alt='teco')
       form#search(action='/projects/admin/search', method='get')
         div
           label(for='proj-search') Search:
@@ -189,9 +189,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           li.last
             a(href='/projects/admin/wiki/demos?action=history') History
         hr
-      h2(id='explorerheader') Demo Radar:
+      #livingmap
+        h2 Living Lab Map
+        object(data='demosTECOIntranet/living-lab.svg' type="image/svg+xml")
+        object(width='400px' data='demosTECOIntranet/2dmapmockup.png' type="image/png")
+          
+      h2(id='explorerheader') Living Lab Radar:
       p The thing in front of you: 
-        span#radartarget
+        strong#radartarget
       #radardiv
       #content.wiki
         .wikipage.searchable
