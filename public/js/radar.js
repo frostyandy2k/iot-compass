@@ -42,8 +42,6 @@ function initRadar(divSelector, items) {
 
     // .attr('aria-hidden',true)
   var svg = spacetime.append("svg")
-    .attr('role','listbox')
-    .attr('aria-describeby','itemslist')
     .attr("width", radius)
     .attr("height", radius)
     .append("g")
@@ -52,18 +50,23 @@ function initRadar(divSelector, items) {
   var w = radius/7;
   var center = svg.append("g")
       .append("svg:a")
+      .attr("aria-live","polite")
       .attr("id", "radarButton")
       .attr("xlink:href", "#pagecontent")
-      .attr('aria-hidden',true)
+      // .attr('aria-hidden',true)
       // .attr('role', 'Nothing is in front of you.');
+  center.append("title").html("Nothing")
+  center.append("desc").html("is in front of you.")
   center.append("svg:image")
+      .attr('aria-hidden',true)
       .attr("xlink:href", "img/arrow.png")
       .attr("x", -w/2)
       .attr("y", -w/2)
       .attr("width", w)
       .attr("height", w);
   w = radius/5
-  center.append("svg:image")
+  var centerimage = center.append("svg:image")
+      .attr('aria-hidden',true)
       .attr("id", "radarTargetImage")
       // .attr("xlink:href", "img/arrow.png")
       .attr("x", -w/2)
@@ -85,14 +88,6 @@ function initRadar(divSelector, items) {
 
   $.each(items, function(key, val){
     // ul.append('<li>'+key+' blub blub</li>')
-    if(val.img) {
-      generatePattern(svg, itemradius*2, val.img, key+'pattern');
-      generatePattern(svg, 100, val.img, key+'patternFull');
-    } else {
-      var img = "img/" + key + ".png"
-      generatePattern(svg, itemradius*2, img, key+'pattern');
-      generatePattern(svg, 100, img, key+'patternFull');
-    }
     var x = -radarradius*Math.sin((val.location.dir)*Math.PI/180);
     var y = -radarradius*Math.cos((val.location.dir)*Math.PI/180);
     // console.log(x,y)
@@ -102,20 +97,40 @@ function initRadar(divSelector, items) {
     if(val.status != undefined && !val.status) {
       color = "red";
     }
-    svg.append("svg:a")
+    /* better performance (in chrome usable), no image borders, images not round */
+    // var w = itemradius*2;
+    // svg.append("svg:a")
+    //   .attr("xlink:href", "#"+key)
+    //   .append("svg:image")
+    //   .attr("id", key+"radar")
+    //   .attr("xlink:href", val.img)
+    //   .attr("x", -w/2)
+    //   .attr("y", -w/2)
+    //   .attr("width", w)
+    //   .attr("height", w)
+    //   .attr("transform", "translate("+x+"," + y + ")")
+
+    /* worse performance (in chrome almost unusable), icons in circles */
+    if(val.img) {
+      generatePattern(svg, itemradius*2, val.img, key+'pattern');
+      generatePattern(svg, 100, val.img, key+'patternFull');
+    } else {
+      var img = "img/" + key + ".png"
+      generatePattern(svg, itemradius*2, img, key+'pattern');
+      generatePattern(svg, 100, img, key+'patternFull');
+    }
+    var item = svg.append("svg:a")
       .attr("xlink:href", "#"+key)
       // .attr('aria-hidden',true)
-      .attr('role','link to '+key+' using role')
-      .attr('title','link to '+key)
       .append("circle")
-      .attr('role',key+' role')
-      .attr('title',key)
       .attr("id", key+"radar")
       .attr("r", itemradius)
       .style("stroke-width", 3)
       .style("stroke", color)
       .attr("transform", "translate("+x+"," + y + ")")
-      .attr("fill","url(#"+key+"pattern)");
+      .attr("fill","url(#"+key+"pattern)")
+    item.append("title").html(key)
+    item.append("desc").html(getLocationText(key))
   });
 }
 var showItems = false;
@@ -139,8 +154,10 @@ function updatePositions(items, direction) {
     // }
     var x = -radarradius*Math.sin(actualDirection*Math.PI/180);
     var y = -radarradius*Math.cos(actualDirection*Math.PI/180);
-    d3.select("#"+key+"radar")
+    var item = d3.select("#"+key+"radar")
       .attr("transform", "translate("+x+", "+y+")")
+    // item.select("title").html(key)
+    item.select("desc").html(getLocationText(key))
   });
 }
 
@@ -200,6 +217,7 @@ function initListeners() {
     // button.select('image')
     //   .attr('xlink:href', 'img/arrow.png')
     $('#radarTargetImage').hide();
+    button.select("title").html("Nothing")
   })
   document.addEventListener('foundItemInFront', function(item) {
     item = item.detail;
@@ -213,16 +231,18 @@ function initListeners() {
     $('#mini_radar_selection').attr('src', 'img/' + item.key + '.png');
     var button = d3.select('#radarButton');
     button.attr("xlink:href", "#"+item.key)
+    var centerimage = d3.select('#radarTargetImage')
     if(item.value.img) {
       // button.select('image')
       //   .attr('xlink:href', item.value.img)
-      d3.select('#radarTargetImage').attr('xlink:href', item.value.img)
+      centerimage.attr('xlink:href', item.value.img)
     } else {
       // button.select('image')
       //   .attr('xlink:href', 'img/' + item.key + '.png')
-      d3.select('#radarTargetImage').attr('xlink:href', 'img/' + item.key + '.png')
+      centerimage.attr('xlink:href', 'img/' + item.key + '.png')
     }
     $('#radarTargetImage').show();
+    button.select("title").html(item.key)
     // $('#selectionCircle').attr("fill","url(#"+item.key+"pattern)");
 
     valURIold = item.key;
@@ -270,7 +290,19 @@ function applyLocationTextChildren(registeredThings){
     }
   })
 }
-
+function getLocationText(id) {
+  var location = indiana.getThingCardinalPosition(id);
+  switch(location) {
+    case 'N': return 'is in front of you.';
+    case 'NW': return 'is in front and to the left of you.';
+    case 'NE': return 'is in front and to the right of you.';
+    case 'SW': return 'is behind to the left of you.';
+    case 'EW': return 'is behind to the right of you.';
+    case 'S': return 'is behind you.';
+    case 'E': return 'is right of you.';
+    case 'W': return 'is left of you.';
+  }
+}
 function createLocationText(id, thing, location, no_of){
     var of = no_of ? '' : ' of';
     // if(location == 'in front') {
