@@ -53,7 +53,7 @@ function initRadar(divSelector, items) {
   center.append("desc").html("is in front of you.")
   center.append("svg:image")
       .attr('aria-hidden',true)
-      .attr("xlink:href", "demos–TecOIntranet/arrow.png")
+      .attr("xlink:href", "arrow.png")
       .attr("x", -w/2)
       .attr("y", -w/2)
       .attr("width", w)
