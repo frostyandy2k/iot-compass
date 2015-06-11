@@ -53,7 +53,7 @@ function initRadar(divSelector, items) {
   center.append("desc").html("is in front of you.")
   center.append("svg:image")
       .attr('aria-hidden',true)
-      .attr("xlink:href", "arrow.png")
+      .attr("xlink:href", "demos–TecOIntranet/arrow.png")
       .attr("x", -w/2)
       .attr("y", -w/2)
       .attr("width", w)
@@ -176,8 +176,6 @@ function initListeners() {
     $('#radartarget').html("No registered things in front of you");
     vibrating = false;
 
-    $('#mini_radar_icon').show();
-    $('#mini_radar_selection').hide();
     var button = d3.select('#radarButton')
     button.attr("xlink:href", "#pagecontent")
     $('#radarTargetImage').hide();
@@ -188,9 +186,6 @@ function initListeners() {
     if(item.key != 'none')
     $('#radartarget').html('You are looking at the <a href="#'+item.key+'">'+ item.key + '</a>');
 
-    $('#mini_radar_icon').hide();
-    $('#mini_radar_selection').show();
-    $('#mini_radar_selection').attr('src', 'img/' + item.key + '.png');
     var button = d3.select('#radarButton');
     button.attr("xlink:href", "#"+item.key)
     var centerimage = d3.select('#radarTargetImage')
@@ -198,7 +193,7 @@ function initListeners() {
     if(item.value.img) {
       centerimage.attr('xlink:href', item.value.img)
     } else {
-      centerimage.attr('xlink:href', 'img/' + item.key + '.png')
+      centerimage.attr('xlink:href', 'demos–TecOIntranet/' + item.key + '.png')
     }
     $('#radarTargetImage').show();
 
