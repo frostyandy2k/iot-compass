@@ -150,11 +150,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           input(type='submit', value='Search')
       #metanav.nav
         ul
-          li.first logged in as unseld
+          li.first logged in as someone
           li
             form#logout.trac-logout(action='/projects/admin/logout', method='post')
-              div
-                input(type='hidden', name='__FORM_TOKEN', value='42ce0cdac6f01d079f3b397c')
               div
                 button(type='submit', name='logout') Logout
           li
@@ -385,10 +383,6 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   | : Temperaturänderungen bei verderblichen Waren
                   strong
                     | Mock-Up eines Systems zur Visualisierung von Temperaturänderungen verderblicher Waren in einem Lagerhaus.
-            h2(id='Slideshow:') Slideshow:
-            p
-              | Die kontinuierliche Anzeige von Bildern wurde mit der kostenpflichtigen Software gPhotoShow auf dem Shuttle-PC realisiert. Lizenzschlüssel (Key) für gPhotoShow:
-              tt 000015-21J4YC-8NRYY9-ZY4YB2-PAGW01-38A7UA-F0FTBX-PUE9EB-DH41K5-G600CB
           .trac-modifiedby
             span
               a(href='/projects/admin/wiki/demos?action=diff&version=250', title='Version 250 by rdissi') Last modified
