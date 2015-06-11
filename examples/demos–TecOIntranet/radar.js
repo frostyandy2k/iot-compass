@@ -31,8 +31,8 @@ function initRadar(divSelector, items) {
   var svgWidth = $(window).width();
   var svgHeight = $(window).height();
 
-  var width = svgWidth,
-      height = svgWidth,
+  var width = (svgWidth < 1000) ? svgWidth : 1000,
+      height = (svgWidth < 1000) ? svgWidth : 1000,
       radius = Math.min(width, height);
       radarradius = Math.round(radius/2.5);
       itemradius = Math.round(radarradius/8);
