@@ -1,0 +1,30 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <line fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="21.28894" y1="26.655662" x2="380.294628" y2="26.655662" id="svg_11" stroke="#000000"/>
+  <line stroke="#000000" fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="21.049377" y1="24.593171" x2="21.049377" y2="372.856774" id="svg_17"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="-3.011894" y="235.261909" width="49" height="4" stroke="#000000" id="svg_36" transform="rotate(-90 21.4881 237.262)"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="297.583345" y="25.440482" width="49" height="4" stroke="#000000" id="svg_34"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="59.049377" y="25.499412" width="49" height="4" id="svg_32" stroke="#000000"/>
+  <line stroke="#000000" fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="379.049377" y1="296.499408" x2="379.049377" y2="24.491347" id="svg_12"/>
+  <line stroke="#000000" fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="379.049377" y1="295.499415" x2="351.118582" y2="323.43021" id="svg_13"/>
+  <line fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="316.049377" y1="352.499412" x2="292.005921" y2="376.542868" id="svg_14" stroke="#000000"/>
+  <line stroke="#000000" fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="18.049378" y1="375.499411" x2="294.049385" y2="375.499411" id="svg_15"/>
+  <line stroke="#000000" fill="none" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="313.049377" y1="353.499412" x2="350.164591" y2="353.499412" id="svg_16"/>
+  <rect fill="none" stroke="#000000" stroke-width="3" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="72.049377" y="257.499412" width="27" height="70" id="svg_18"/>
+  <polygon id="svg_19" fill="none" points="219.22 86.4994 201.828 110.438 173.686 101.294 173.686 71.7045 201.828 62.5608 219.22 86.4994" stroke="#000000" stroke-width="3" transform="rotate(-17.451 196.453 86.4994)"/>
+  <rect fill="none" stroke="#000000" stroke-width="3" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="348.049377" y="50.499412" width="25" height="64" id="svg_20"/>
+  <rect fill="none" stroke="#000000" stroke-width="3" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="351.049377" y="156.499412" width="22" height="104" id="svg_21"/>
+  <rect stroke="#000000" fill="none" stroke-width="3" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="28.049377" y="355.499412" width="257.999989" height="14" id="svg_23"/>
+  <ellipse fill="none" stroke-width="3" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="126.549377" cy="285.999412" id="svg_24" rx="5.5" ry="28.5" stroke="#000000"/>
+  <path fill="none" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" id="svg_26" d="m340.049377,325.49939c0.221344,2.649506 0.283966,3.189331 0.425323,4.388c0.074646,0.632843 0.154053,1.270142 0.29068,2.509338c0.121521,1.102203 0.211334,1.989868 0.247986,2.686676c0.053009,1.007202 -0.022064,2.022583 0.09317,2.815979c0.147614,1.016052 0.526978,1.59967 0.776184,2.766663c0.166656,0.780457 0.15509,1.354034 0.165314,2.23468c0.013916,1.195892 0.001343,2.057007 0.001343,2.828003c0,0.960815 0,1.937317 0,2.77066l0,0.978485l0,0.71701"/>
+  <path stroke="#000000" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" id="svg_27" d="m345.964233,330.538086c3.541962,0.925446 4.327118,1.188721 5.173401,1.494904c0.908478,0.328613 1.849823,0.686707 2.794495,1.07785c0.960663,0.397827 1.941559,0.791138 3.611206,1.704529c0.794128,0.434357 1.480835,0.896637 2.087463,1.364349c0.587372,0.45282 1.093628,0.917816 1.529541,1.385864c0.424561,0.455811 0.807831,0.911682 1.370972,1.82547c0.271545,0.440765 0.483459,0.880341 0.666931,1.310638c0.178223,0.418091 0.320465,0.827271 0.436066,1.22467c0.11142,0.382935 0.204224,0.752075 0.322052,1.443512c0.054413,0.319244 0.090088,0.622223 0.117065,0.909607c0.025604,0.272858 0.040802,0.532715 0.049713,0.780609c0.008514,0.237183 0.011414,1.102295 0.011414,1.503937c0,0.602509 0,1.025055 0,1.725189c0,0.512329 0,0.774414 0,1.295654l0,0.497406l0,0.83313l0,0.461945" transform="rotate(49.1844 355.049 340.958)"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="139.84526" y="25.440482" width="49" height="4" stroke="#000000" id="svg_35"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="-3.011894" y="162.345229" width="49" height="4" stroke="#000000" transform="rotate(-90 21.4881 164.345)" id="svg_37"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="-3.011894" y="83.476176" width="49" height="4" stroke="#000000" transform="rotate(-90 21.4881 85.4758)" id="svg_38"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="-3.011894" y="318.59524" width="49" height="4" stroke="#000000" transform="rotate(-90 21.4881 320.595)" id="svg_39"/>
+  <rect fill="#ffffff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="220.202363" y="25.440482" width="49" height="4" stroke="#000000" id="svg_40"/>
+  <rect fill="none" stroke-width="3" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="26.84523" y="34.130945" width="11.607143" height="47.630951" id="svg_41" stroke="#000000"/>
+ </g>
+</svg>

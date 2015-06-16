@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="950"
+   height="900"
+   id="svg3267"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="living-lab2.svg">
+  <metadata
+     id="metadata3301">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3299">
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="AudioLedLampepattern">
+      <image
+         sodipodi:absref="./ThumbAudioLed_radar.png"
+         xlink:href="./ThumbAudioLed_radar.png"
+         height="56"
+         width="56"
+         id="image3660" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="VDARpattern">
+      <image
+         sodipodi:absref="./VDAR_Logo_radar.png"
+         xlink:href="./VDAR_Logo_radar.png"
+         height="56"
+         width="56"
+         id="image3647" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="EmbeddedBusinessSystemspattern">
+      <image
+         sodipodi:absref="./EBS_front_radar.png"
+         xlink:href="./EBS_front_radar.png"
+         height="56"
+         width="56"
+         id="image3634" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="TecoEnvboardpattern">
+      <image
+         sodipodi:absref="./envboard-demo-neu_radar.png"
+         xlink:href="./envboard-demo-neu_radar.png"
+         height="56"
+         width="56"
+         id="image3725" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="HealthCareDemopattern">
+      <image
+         sodipodi:absref="./ThumbKneeGuard_radar.png"
+         xlink:href="./ThumbKneeGuard_radar.png"
+         height="56"
+         width="56"
+         id="image3712" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="PointAndClickpattern">
+      <image
+         sodipodi:absref="./ThumbPointAndClick_radar.png"
+         xlink:href="./ThumbPointAndClick_radar.png"
+         height="56"
+         width="56"
+         id="image3699" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="AudioLedLampe1pattern">
+      <image
+         sodipodi:absref="./ThumbAudioLed_radar.png"
+         xlink:href="./ThumbAudioLed_radar.png"
+         height="56"
+         width="56"
+         id="image3686" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="LedPowerDemopattern">
+      <image
+         sodipodi:absref="./ThumbLedPower_radar.png"
+         xlink:href="./ThumbLedPower_radar.png"
+         height="56"
+         width="56"
+         id="image3673" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="LandmarkeDemopattern">
+      <image
+         sodipodi:absref="./Landmarke Demo_radar.png"
+         xlink:href="./Landmarke Demo_radar.png"
+         height="56"
+         width="56"
+         id="image3790" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="AudioLedLampe3pattern">
+      <image
+         sodipodi:absref="./ThumbAudioLed_radar.png"
+         xlink:href="./ThumbAudioLed_radar.png"
+         height="56"
+         width="56"
+         id="image3777" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="MachineHealthDemopattern">
+      <image
+         sodipodi:absref="./ThumbMachineHealth_radar.png"
+         xlink:href="./ThumbMachineHealth_radar.png"
+         height="56"
+         width="56"
+         id="image3764" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="AudioLedLampe2pattern">
+      <image
+         sodipodi:absref="./ThumbAudioLed_radar.png"
+         xlink:href="./ThumbAudioLed_radar.png"
+         height="56"
+         width="56"
+         id="image3751" />
+    </pattern>
+    <pattern
+       height="28"
+       width="28"
+       patternUnits="objectBoundingBox"
+       id="RfidCommunicationDemopattern">
+      <image
+         sodipodi:absref="./ThumbRfidCollab_radar.png"
+         xlink:href="./ThumbRfidCollab_radar.png"
+         height="56"
+         width="56"
+         id="image3738" />
+    </pattern>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1617"
+     inkscape:window-height="1026"
+     id="namedview3297"
+     showgrid="false"
+     inkscape:zoom="0.7486493"
+     inkscape:cx="5.5906618"
+     inkscape:cy="557.92534"
+     inkscape:window-x="63"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g3269" />
+  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+  <g
+     id="g3269"
+     transform="matrix(2.3565192,0,0,2.3565192,17.453064,-38.716761)">
+    <title
+       id="title3271">Layer 1</title>
+    <line
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x1="21.28894"
+       y1="26.655663"
+       x2="380.29462"
+       y2="26.655663"
+       id="svg_11"
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <line
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x1="21.049377"
+       y1="24.59317"
+       x2="21.049377"
+       y2="372.85678"
+       id="svg_17"
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="-3.011894"
+       y="235.2619"
+       width="49"
+       height="4"
+       id="svg_36"
+       transform="matrix(0,-1,1,0,-215.7739,258.7501)"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="297.58334"
+       y="25.440481"
+       width="49"
+       height="4"
+       id="svg_34"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="59.049377"
+       y="25.499413"
+       width="49"
+       height="4"
+       id="svg_32"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <line
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x1="379.04938"
+       y1="296.49942"
+       x2="379.04938"
+       y2="24.491346"
+       id="svg_12"
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <line
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x1="379.04938"
+       y1="295.49942"
+       x2="351.11859"
+       y2="323.43021"
+       id="svg_13"
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <line
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x1="316.04938"
+       y1="352.49942"
+       x2="292.00592"
+       y2="376.54288"
+       id="svg_14"
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <line
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x1="18.049377"
+       y1="375.49942"
+       x2="294.04938"
+       y2="375.49942"
+       id="svg_15"
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <line
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x1="313.04938"
+       y1="353.49942"
+       x2="350.16458"
+       y2="353.49942"
+       id="svg_16"
+       style="fill:none;stroke:#000000;stroke-width:5;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="72.049377"
+       y="257.49942"
+       width="27"
+       height="70"
+       id="svg_18"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none" />
+    <polygon
+       id="svg_19"
+       points="173.686,101.294 173.686,71.7045 201.828,62.5608 219.22,86.4994 219.22,86.4994 201.828,110.438 "
+       transform="matrix(0.95397377,-0.29989006,0.29989006,0.95397377,-16.898319,62.895543)"
+       style="fill:none;stroke:#000000;stroke-width:2.07933803;stroke-miterlimit:4;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="348.04938"
+       y="50.499413"
+       width="25"
+       height="64"
+       id="svg_20"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="351.04938"
+       y="156.4994"
+       width="22"
+       height="104"
+       id="svg_21"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="28.049377"
+       y="355.49942"
+       width="258"
+       height="14"
+       id="svg_23"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none" />
+    <ellipse
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       cx="126.54938"
+       cy="285.99942"
+       id="svg_24"
+       rx="5.5"
+       ry="28.5"
+       d="m 132.04938,285.99942 c 0,15.74012 -2.46244,28.5 -5.5,28.5 -3.03757,0 -5.5,-12.75988 -5.5,-28.5 0,-15.74012 2.46243,-28.5 5.5,-28.5 3.03756,0 5.5,12.75988 5.5,28.5 z"
+       sodipodi:cx="126.54938"
+       sodipodi:cy="285.99942"
+       sodipodi:rx="5.5"
+       sodipodi:ry="28.5"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none" />
+    <path
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       id="svg_26"
+       d="m 340.04938,325.49939 c 0.22134,2.64951 0.28396,3.18933 0.42532,4.388 0.0747,0.63284 0.15405,1.27014 0.29068,2.50934 0.12152,1.1022 0.21133,1.98987 0.24799,2.68667 0.053,1.00721 -0.0221,2.02259 0.0932,2.81598 0.14761,1.01605 0.52697,1.59967 0.77618,2.76667 0.16666,0.78045 0.15509,1.35403 0.16531,2.23468 0.0139,1.19589 10e-4,2.057 10e-4,2.828 0,0.96081 0,1.93732 0,2.77066 l 0,0.97848 0,0.71701"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-width:0;stroke-dasharray:none" />
+    <path
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       id="svg_27"
+       d="m 345.96423,330.53809 c 3.54196,0.92544 4.32712,1.18872 5.1734,1.4949 0.90848,0.32861 1.84983,0.68671 2.7945,1.07785 0.96066,0.39783 1.94156,0.79114 3.6112,1.70453 0.79413,0.43436 1.48084,0.89664 2.08747,1.36435 0.58737,0.45282 1.09363,0.91781 1.52954,1.38586 0.42456,0.45581 0.80783,0.91168 1.37097,1.82547 0.27155,0.44077 0.48346,0.88034 0.66693,1.31064 0.17822,0.41809 0.32047,0.82727 0.43607,1.22467 0.11142,0.38294 0.20422,0.75208 0.32205,1.44351 0.0544,0.31925 0.0901,0.62223 0.11706,0.90961 0.0256,0.27286 0.0408,0.53271 0.0497,0.78061 0.009,0.23718 0.0114,1.10229 0.0114,1.50394 0,0.6025 0,1.02505 0,1.72518 0,0.51233 0,0.77442 0,1.29566 l 0,0.4974 0,0.83313 0,0.46195"
+       transform="matrix(0.65362669,0.75681712,-0.75681712,0.65362669,381.02235,-150.60841)"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="139.84526"
+       y="25.440481"
+       width="49"
+       height="4"
+       id="svg_35"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="-3.011894"
+       y="162.34523"
+       width="49"
+       height="4"
+       transform="matrix(0,-1,1,0,-142.8569,185.8331)"
+       id="svg_37"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="-3.011894"
+       y="83.476173"
+       width="49"
+       height="4"
+       transform="matrix(0,-1,1,0,-63.9877,106.9639)"
+       id="svg_38"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="-3.011894"
+       y="318.59525"
+       width="49"
+       height="4"
+       transform="matrix(0,-1,1,0,-299.1069,342.0831)"
+       id="svg_39"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="220.20236"
+       y="25.440481"
+       width="49"
+       height="4"
+       id="svg_40"
+       style="fill:#ffffff;stroke:#000000;stroke-dasharray:none" />
+    <rect
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       x="26.84523"
+       y="34.130943"
+       width="11.607143"
+       height="47.630951"
+       id="svg_41"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-dasharray:none" />
+  </g>
+  <a
+     transform="matrix(1.4792947,0,0,1.4792947,379.61491,268.63092)"
+     title="link to EmbeddedBusinessSystems"
+     role="link to EmbeddedBusinessSystems using role"
+     id="a3641">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(-173.12604,-145.27)"
+       style="fill:url(#EmbeddedBusinessSystemspattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="EmbeddedBusinessSystems"
+       title="EmbeddedBusinessSystems"
+       role="EmbeddedBusinessSystems role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z" 
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.4910516,0,0,1.4910516,393.86734,299.42477)"
+     title="link to VDAR"
+     role="link to VDAR using role"
+     id="a3654">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(-195.72174,-113)"
+       style="fill:url(#VDARpattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="VDAR"
+       title="VDAR"
+       role="VDAR role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z" 
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <circle
+     sodipodi:ry="28"
+     sodipodi:rx="28"
+     sodipodi:cy="0"
+     sodipodi:cx="0"
+     cy="0"
+     cx="0"
+     transform="matrix(1.3558813,0,0,1.3558813,195.87114,66.338062)"
+     style="fill:url(#AudioLedLampepattern);stroke:#000000;stroke-width:3"
+     r="28"
+     id="AudioLedLampe"
+     title="AudioLedLampe"
+     role="AudioLedLampe role"
+     d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+     onclick="top.selectItem(this.id)" />
+  <a
+     transform="matrix(1.4940734,0,0,1.4940734,421.07379,262.23295)"
+     title="link to LedPowerDemo"
+     role="link to LedPowerDemo using role"
+     id="a3680">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(-212.37053,77.296552)"
+       style="fill:url(#LedPowerDemopattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="LedPowerDemo"
+       title="LedPowerDemo"
+       role="LedPowerDemo role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.3918803,0,0,1.3918803,230.77658,326.88811)"
+     title="link to AudioLedLampe1"
+     role="link to AudioLedLampe1 using role"
+     id="a3693">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(-77.296552,212.37053)"
+       style="fill:url(#AudioLedLampe1pattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="AudioLedLampe1"
+       title="AudioLedLampe1"
+       role="AudioLedLampe1 role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.4836064,0,0,1.4836064,379.30696,443.26264)"
+     title="link to PointAndClick"
+     role="link to PointAndClick using role"
+     id="a3706">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(0,226)"
+       style="fill:url(#PointAndClickpattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="PointAndClick"
+       title="PointAndClick"
+       role="PointAndClick role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.3691844,0,0,1.3691844,397.545,410.45737)"
+     title="link to HealthCareDemo"
+     role="link to HealthCareDemo using role"
+     id="a3719">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="matrix(1.0835694,0,0,1.0835694,65.586163,269.89402)"
+       style="fill:url(#HealthCareDemopattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="HealthCareDemo"
+       title="HealthCareDemo"
+       role="HealthCareDemo role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.4836064,0,0,1.4836064,525.97124,464.6909)"
+     title="link to TecoEnvboard"
+     role="link to TecoEnvboard using role"
+     xlink:href="#TecoEnvboard"
+     id="a3732">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(77.296552,212.37053)"
+       style="fill:url(#TecoEnvboardpattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="TecoEnvboard"
+       title="TecoEnvboard"
+       role="TecoEnvboard role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.3914589,0,0,1.3914589,513.05927,467.37109)"
+     title="link to RfidCommunicationDemo"
+     role="link to RfidCommunicationDemo using role"
+     id="a3745">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(222.56655,39.244488)"
+       style="fill:url(#RfidCommunicationDemopattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="RfidCommunicationDemo"
+       title="RfidCommunicationDemo"
+       role="RfidCommunicationDemo role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.3914589,0,0,1.3914589,496.91459,373.3763)"
+     title="link to AudioLedLampe2"
+     role="link to AudioLedLampe2 using role"
+     id="a3758">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(226,0)"
+       style="fill:url(#AudioLedLampe2pattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="AudioLedLampe2"
+       title="AudioLedLampe2"
+       role="AudioLedLampe2 role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.3914589,0,0,1.3914589,526.27007,337.03142)"
+     title="link to MachineHealthDemo"
+     role="link to MachineHealthDemo using role"
+     id="a3771">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(222.56655,-39.244488)"
+       style="fill:url(#MachineHealthDemopattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="MachineHealthDemo"
+       title="MachineHealthDemo"
+       role="MachineHealthDemo role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z" 
+       onclick="top.selectItem(this.id)"/>
+  </a>
+  <a
+     transform="matrix(1.3914589,0,0,1.3914589,622.78764,322.66679)"
+     title="link to AudioLedLampe3"
+     role="link to AudioLedLampe3 using role"
+     id="a3784">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(145.27,-173.12604)"
+       style="fill:url(#AudioLedLampe3pattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="AudioLedLampe3"
+       title="AudioLedLampe3"
+       role="AudioLedLampe3 role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <a
+     transform="matrix(1.3914589,0,0,1.3914589,585.04489,342.2371)"
+     title="link to LandmarkeDemo"
+     role="link to LandmarkeDemo using role"
+     id="a3797">
+    <circle
+       sodipodi:ry="28"
+       sodipodi:rx="28"
+       sodipodi:cy="0"
+       sodipodi:cx="0"
+       cy="0"
+       cx="0"
+       transform="translate(113,-195.72174)"
+       style="fill:url(#LandmarkeDemopattern);stroke:#000000;stroke-width:3"
+       r="28"
+       id="LandmarkeDemo"
+       title="LandmarkeDemo"
+       role="LandmarkeDemo role"
+       d="M 28,0 C 28,15.463973 15.463973,28 0,28 -15.463973,28 -28,15.463973 -28,0 c 0,-15.463973 12.536027,-28 28,-28 15.463973,0 28,12.536027 28,28 z"
+       onclick="top.selectItem(this.id)" />
+  </a>
+  <path
+     style="fill:#ff6600;stroke:#ff5000;stroke-width:1.45033717px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.96803655"
+     d="m 440.3795,188.27633 c 26.79832,10.95309 52.20658,48.79287 60.27849,65.00086"
+     id="path3218"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:#ff6600;stroke:#ff5000;stroke-width:1.54150426px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.96803655"
+     d="m 522.00316,190.13324 c -29.45489,15.61872 -64.20147,23.45629 -82.27431,47.40851"
+     id="path3220"
+     inkscape:connector-curvature="0" />
+</svg>
