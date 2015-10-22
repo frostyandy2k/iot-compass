@@ -91,12 +91,19 @@ function initRadar(divSelector, items) {
     .style("stroke", "#ff6f00")
     .attr("fill","none");
 
-      svg.append('clipPath')
-      .attr('id', 'clipCircle')
-      .append('circle')
-        .attr('r', itemradius)
-        .attr('cx','0')
-        .attr('cy','0');
+  svg.append('clipPath')
+  .attr('id', 'clipCircle')
+  .append('circle')
+    .attr('r', itemradius)
+    .attr('cx','0')
+    .attr('cy','0');
+
+  svg.append('clipPath')
+  .attr('id', 'clipCenterCircle')
+  .append('circle')
+    .attr('r', itemradius*2)
+    .attr('cx','0')
+    .attr('cy','0');
 
   $.each(items, function(key, val){
     // ul.append('<li>'+key+' blub blub</li>')
@@ -264,7 +271,15 @@ function initListeners() {
     $('#mini_radar_selection').show();
     $('#mini_radar_selection').attr('src', 'img/' + item.key + '.png');
     var button = d3.select('#radarButton');
-    button.attr("xlink:href", "#"+item.key)
+    button.attr("xlink:href", "#"+item.key);
+
+    //tried a stroke around the image but did not succeed
+     // button.append("circle")
+     //    .attr("fill", "none")      
+     //    .attr("r", itemradius)
+     //    .style("stroke-width", 2)
+     //    .style("stroke", color);
+
     var centerimage = d3.select('#radarTargetImage')
     if(item.value.img) {
       // button.select('image')
@@ -273,8 +288,16 @@ function initListeners() {
     } else {
       // button.select('image')
       //   .attr('xlink:href', 'img/' + item.key + '.png')
+      //I believe this falls back to an image if there is no semantic data about the image
       centerimage.attr('xlink:href', 'img/' + item.key + '.png')
     }
+
+
+
+    centerimage.attr('clip-path','url(#clipCenterCircle)');
+
+    
+
     $('#radarTargetImage').show();
     button.select("title").html(item.key)
     // $('#selectionCircle').attr("fill","url(#"+item.key+"pattern)");
