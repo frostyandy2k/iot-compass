@@ -47,6 +47,11 @@ function initRadar(divSelector, items) {
     .append("g")
     .attr("transform", "translate(" + radius / 2 + "," + radius / 2 + ")");
 
+  //  <clipPath id="clipCircle">
+  //   <circle r="50" cx="50" cy="50"/>
+  // </clipPath>
+  // <rect width="100" height="100" clip-path="url(#clipCircle)"/>
+
   var w = radius/7;
   var center = svg.append("g")
       .append("svg:a")
@@ -86,6 +91,13 @@ function initRadar(divSelector, items) {
     .style("stroke", "#ff6f00")
     .attr("fill","none");
 
+      svg.append('clipPath')
+      .attr('id', 'clipCircle')
+      .append('circle')
+        .attr('r', itemradius)
+        .attr('cx','0')
+        .attr('cy','0');
+
   $.each(items, function(key, val){
     // ul.append('<li>'+key+' blub blub</li>')
     var x = -radarradius*Math.sin((val.location.dir)*Math.PI/180);
@@ -112,23 +124,45 @@ function initRadar(divSelector, items) {
 
     /* worse performance (in chrome almost unusable), icons in circles */
     if(val.img) {
-      generatePattern(svg, itemradius*2, val.img, key+'pattern');
-      generatePattern(svg, 100, val.img, key+'patternFull');
+      // generatePattern(svg, itemradius*2, val.img, key+'pattern');
+      // generatePattern(svg, 100, val.img, key+'patternFull');
     } else {
-      var img = "img/" + key + ".png"
-      generatePattern(svg, itemradius*2, img, key+'pattern');
-      generatePattern(svg, 100, img, key+'patternFull');
+      // var img = "img/" + key + ".png"
+      // generatePattern(svg, itemradius*2, img, key+'pattern');
+      // generatePattern(svg, 100, img, key+'patternFull');
     }
     var item = svg.append("svg:a")
-      .attr("xlink:href", "#"+key)
-      // .attr('aria-hidden',true)
-      .append("circle")
-      .attr("id", key+"radar")
+      .attr("xlink:href", "#xzx")
+        .attr("id", key+"radar");
+
+        item.append("svg:image")
+        .attr("xlink:href", val.img)
+        .attr('x', -itemradius)
+        .attr('y', -itemradius)
+        // .attr("transform", "translate("+x+"," + y + ")")
+        .attr('width', itemradius*2)
+        .attr('height', itemradius*2)
+        .attr('clip-path','url(#clipCircle)');
+
+      item.append("circle")
+        .attr("fill", "none")      
       .attr("r", itemradius)
-      .style("stroke-width", 3)
+      .style("stroke-width", 2)
       .style("stroke", color)
-      .attr("transform", "translate("+x+"," + y + ")")
-      .attr("fill","url(#"+key+"pattern)")
+
+
+
+      // .attr('aria-hidden',true)
+
+      // item.append("circle")
+      // .attr("r", itemradius)
+      // .style("stroke-width", 3)
+      // .style("stroke", "green")
+      // // // .attr("id", key+"radar")
+      // .attr("transform", "translate("+x+"," + y + ")")
+
+      // .attr('clip-path','url(#clipCircle)');
+      // .attr("fill","url(#"+key+"pattern)")
     item.append("title").html(key)
     item.append("desc").html(getLocationText(key))
   });
@@ -317,6 +351,8 @@ $(document).ready(function() {
   $("#qrcodediv").hide();
   indiana = spatialAwareness();
   getIndianaData();
+  //initialization of the Standard text
+  $('#radartarget').html("Rotate your device to explore your surroundings");
   // initDeviceMotion();
     // if(hasGetUserMedia()) readqrcode();
     // else console.log("Browser doesn't support video capture.")
